@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="iv_pkmn_detail">pokemon</string>
+    <string name = "menu_about">About</string>
+    <string name = "menu_search">Search</string>
+    <string name = "menu_favor">Favorite</string>
+    <string name = "menu_del_all">Free All</string>
+    <string name = "menu_all_fav">Add All to Favorite</string>
+    <string name = "mn_cont_favor">Add to Favorite</string>
+    <string name = "mn_cont_del_favor">Delete from Favorites</string>
+    <string name = "menu_home">Home</string>
+
+    <string name="types">Types:</string>
+    <string name="general_info">General Info:</string>
+    <string name="height">Height:</string>
+    <string name="weight">Weight:</string>
+    <string name="exp">Base Experience:</string>
+    <string name="stats">Statistics:</string>
+    <string name="speed">Speed</string>
+    <string name="special_defense">Spec. Defense</string>
+    <string name="special_attack">Spec. Attack</string>
+    <string name="defense">Defense</string>
+    <string name="attack">Attack</string>
+    <string name="health" translatable="false">HP</string>
+    <string name="abilities">Abilities:</string>
+    <string name="moves">Moves:</string>
+</resources>

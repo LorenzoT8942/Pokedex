@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#ac2a21</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="fireType">#DD2C00</color>
+    <color name = "newYellow">#f2f425</color>
+    <color name = "favorYellow">#eef218</color>
+    <color name="newPokedexColor">#ac2a21</color>
+
+    <color name="light">#F1F6F8</color>
+    <color name="red">#E74C3C</color>
+    <color name="orange">#E67E22</color>
+    <color name="yellow">#F1C40F</color>
+    <color name="green">#2ECC71</color>
+    <color name="blue">#3498DB</color>
+    <color name="pink">#F5B1CC</color>
+
+</resources>
