@@ -1,10 +1,14 @@
 package it.lorenzotanzi.pokedex;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,9 +31,13 @@ import java.util.Locale;
 
 public class AboutActivity extends AppCompatActivity {
 
+    List<Pokemon> favoritesList = new ArrayList<>();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        favoritesList = getIntent().getParcelableArrayListExtra("favorites");
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = findViewById(R.id.rv_developers);
@@ -41,6 +49,29 @@ public class AboutActivity extends AppCompatActivity {
         TextView tv_content_info = findViewById(R.id.tv_content_info);
         tv_content_info.setText(loadFile());
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_about, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_favor) {
+            Intent intent = new Intent(this, FavoritesPokemonActivity.class);
+            intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) favoritesList);
+            startActivity(intent);
+        }
+
+        if(item.getItemId() == R.id.menu_home){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+        return true;
     }
 
     private List<String> loadDevelopersGeneral(){

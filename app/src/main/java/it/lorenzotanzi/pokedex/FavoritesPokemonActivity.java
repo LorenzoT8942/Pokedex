@@ -2,6 +2,7 @@ package it.lorenzotanzi.pokedex;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -83,6 +84,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         if(item.getItemId() == R.id.menu_about) {
 
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+            intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) favoritesList);
             startActivity(intent);
 
         }else{

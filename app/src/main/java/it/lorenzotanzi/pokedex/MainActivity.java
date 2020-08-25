@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         if(item.getItemId() == R.id.menu_about) {
 
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+            intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) mAdapter.chosenFavorites());
             startActivity(intent);
 
         }
