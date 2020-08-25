@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
     private PokemonRvAdapter mAdapter;
     private ActionMode mActionMode; // new add for menu
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Log.d("MAIN", "onCreate");
         MyViewModelFactory myViewModelFactory = new MyViewModelFactory(this.getApplication());
         mViewModel = new ViewModelProvider(this, myViewModelFactory).get(MainViewModel.class);
@@ -51,10 +51,9 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
         /* creazione cartella dove andranno salvate le immagini di front-default dei pokemon in locale */
         File imgCacheFolder = new File(getCacheDir() + "/pokemons");
-        if(!imgCacheFolder.exists()){
+        if (!imgCacheFolder.exists()) {
             imgCacheFolder.mkdir();
         }
-
 
     }
 
@@ -169,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            Log.d("FAVORITE IS (PORCODDIOCANE)", "PRE START" );
             mAdapter.deselectAll();
             mActionMode = null;
         }
@@ -187,5 +185,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
         return false;
     }
+
 }
 
