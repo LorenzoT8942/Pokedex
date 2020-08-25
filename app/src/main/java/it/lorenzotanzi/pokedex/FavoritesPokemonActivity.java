@@ -78,7 +78,14 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
 
             favoritesAdapter.removeAllFavorites();
 
-        }else {
+        }
+        /* ci va la condizione dell'About */
+        if(item.getItemId() == R.id.menu_about) {
+
+            Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+            startActivity(intent);
+
+        }else{
 
             return super.onContextItemSelected(item);
         }

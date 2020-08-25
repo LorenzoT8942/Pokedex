@@ -109,6 +109,12 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         }
 
         /* add also About Icon --> need to show app's rules and developers  */
+        if(item.getItemId() == R.id.menu_about) {
+
+            Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+            startActivity(intent);
+
+        }
 
         return true;
     }

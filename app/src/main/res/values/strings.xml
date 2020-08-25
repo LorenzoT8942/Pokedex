@@ -9,6 +9,8 @@
     <string name = "mn_cont_favor">Add to Favorite</string>
     <string name = "mn_cont_del_favor">Delete from Favorites</string>
     <string name = "menu_home">Home</string>
+    <string name="tv_general_info">Info</string>
+    <string name="tv_developers">Developers</string>
 
     <string name="types">Types:</string>
     <string name="general_info">General Info:</string>
