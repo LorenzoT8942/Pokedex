@@ -82,6 +82,7 @@ public class AboutActivity extends AppCompatActivity {
             while((singleGeneral = br.readLine()) != null){
                 developersGeneral.add(singleGeneral);
             }
+            br.close();
         }catch (IOException e){}
 
         return developersGeneral;
@@ -95,6 +96,7 @@ public class AboutActivity extends AppCompatActivity {
             while((singleEmail = br.readLine()) != null){
                 developersEmail.add(singleEmail);
             }
+            br.close();
         }catch (IOException e){}
 
         return developersEmail;
@@ -120,6 +122,7 @@ public class AboutActivity extends AppCompatActivity {
                 stringBuilder.append("\n").append(string);
             }
             ret = stringBuilder.toString();
+            br.close();
         }catch(IOException e){}
 
         return ret;
