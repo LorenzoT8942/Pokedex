@@ -10,8 +10,8 @@ import java.io.InputStreamReader;
 
 public class LoadFileInfoThread extends Thread{
 
-    Context context;
-    InputStream inputStream;
+    private Context context;
+    private InputStream inputStream;
     public static final String NOTIFICATION = "it.lorenzotanzi.pokedex.threads.LoadFileInfoThread.result";
 
     public LoadFileInfoThread(InputStream is, Context context){

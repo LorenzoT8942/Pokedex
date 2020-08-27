@@ -1,6 +1,5 @@
 package it.lorenzotanzi.pokedex.threads;
 
-import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 
@@ -13,9 +12,9 @@ import java.util.List;
 
 public class LoadGeneralsThread extends Thread{
 
-    Context context;
-    InputStream inputStream1;
-    InputStream inputStream2;
+    private Context context;
+    private InputStream inputStream1;
+    private InputStream inputStream2;
 
     public static final String NOTIFICATION = "it.lorenzotanzi.pokedex.threads.LoadGeneralsThread.result";
 
@@ -60,7 +59,7 @@ public class LoadGeneralsThread extends Thread{
                 emails.add(singleEmail);
             }
             br.close();
-        }catch (IOException e){}
+        }catch (IOException ignored){}
 
         return emails;
     }

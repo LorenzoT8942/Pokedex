@@ -40,24 +40,19 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.Holder>{
 
         if(position == 0){
             holder.iv_image.setImageResource(R.drawable.ic_claudio);
-            //holder.cl_item_about.setBackgroundColor(Color.LTGRAY);
 
         }
         if(position == 1){
             holder.iv_image.setImageResource(R.drawable.ic_ana);
-            //holder.cl_item_about.setBackgroundColor(Color.GRAY);
         }
         if(position == 2){
             holder.iv_image.setImageResource(R.drawable.ic_dominique);
-            //holder.cl_item_about.setBackgroundColor(Color.LTGRAY);
         }
         if(position == 3){
             holder.iv_image.setImageResource(R.drawable.ic_alison);
-            //holder.cl_item_about.setBackgroundColor(Color.GRAY);
         }
             /*if(position == 4){
                 holder.iv_image.setImageResource(R.drawable.ic_lorenzo);
-                holder.cl_item_about.setBackgroundColor(Color.LTGRAY);
             }*/
     }
 
