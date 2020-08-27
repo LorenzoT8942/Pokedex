@@ -3,6 +3,7 @@ package it.lorenzotanzi.pokedex;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -25,10 +26,16 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
     private FavoritesPokemonRvAdapter favoritesAdapter;
     List<Pokemon> favoritesList = new ArrayList<>();
 
+    private boolean isInActionMode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_pokemon);
+
+        if (savedInstanceState != null && savedInstanceState.getBoolean("ActionMode", false)) {
+            startSupportActionMode(mActionModeCallback);
+        }
 
         favoritesList = getIntent().getParcelableArrayListExtra("favorites");
 
@@ -110,6 +117,9 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.getMenuInflater().inflate(R.menu.menu_context_favor, menu);
+
+            isInActionMode = true;
+
             return true;
         }
 
@@ -133,6 +143,9 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
+
+            isInActionMode = false;
+
             favoritesAdapter.deselectAll();
             mActionMode = null;
         }
@@ -150,4 +163,28 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
 
         return false;
     }
+
+    /* new add */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("ActionMode", isInActionMode);
+
+        outState.putParcelableArrayList("favorites", (ArrayList<? extends Parcelable>) favoritesAdapter.getFavorites());
+        outState.putParcelable("myBooleanArray", new SparseBooleanArrayParcelable(favoritesAdapter.getSelectedList()));
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        List<Pokemon> pokemons = savedInstanceState.getParcelableArrayList("favorites");
+        SparseBooleanArray array = (SparseBooleanArray) savedInstanceState.getParcelable("myBooleanArray");
+
+        favoritesAdapter.setFavorites(pokemons);
+        favoritesAdapter.setSparseBooleanArray(array);
+
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
 }

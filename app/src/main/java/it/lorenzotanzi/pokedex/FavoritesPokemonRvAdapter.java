@@ -329,4 +329,21 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public List<Pokemon> getFavorites(){
+        return favorites;
+    }
+
+
+    public SparseBooleanArray getSelectedList(){
+        return selectedList;
+    }
+
+    public void setFavorites(List<Pokemon> pokemons){
+        favorites = pokemons;
+    }
+
+    public void setSparseBooleanArray(SparseBooleanArray array){
+        selectedList = array;
+    }
+
 }
