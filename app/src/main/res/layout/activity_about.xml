@@ -86,9 +86,9 @@
                 android:id="@+id/tv_content_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
+                android:background="@color/yellow"
                 android:textAlignment="center"
-                android:textColor="@android:color/primary_text_dark" />
+                android:textColor="@color/newPokedexColor" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
