@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import androidx.appcompat.view.ActionMode;
+
+import android.util.SparseArray;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +32,7 @@ import java.util.List;
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 
 // deve implementare anche searchView.setOnQueryTextListener -- REGOLI'S OBBLIGATION
-public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener{
+public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener {
 
     private MainViewModel mViewModel;
     private RecyclerView mRecyclerView;
@@ -37,10 +40,16 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
     private PokemonRvAdapter mAdapter;
     private ActionMode mActionMode; // new add for menu
 
+    private boolean isInActionMode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState != null && savedInstanceState.getBoolean("ActionMode", false)) {
+            startSupportActionMode(mActionModeCallback);
+        }
 
         Log.d("MAIN", "onCreate");
         MyViewModelFactory myViewModelFactory = new MyViewModelFactory(this.getApplication());
@@ -57,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         Log.d("MAIN", "initializing recycler view");
         mRecyclerView = findViewById(R.id.rv_pkmn);
         mRecyclerView.setHasFixedSize(true); // new add for filter search
@@ -70,10 +79,10 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private void initListeners(){
+    private void initListeners() {
     }
 
-    private void initObservers(){
+    private void initObservers() {
         Log.d("MAIN", "initializing observers");
         mViewModel.getAllPokemons().observe(this, new Observer<List<Pokemon>>() {
             @Override
@@ -101,14 +110,14 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menu_favor){
+        if (item.getItemId() == R.id.menu_favor) {
             Intent intent = new Intent(MainActivity.this, FavoritesPokemonActivity.class);
             intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) mAdapter.chosenFavorites());
             startActivity(intent);
         }
 
         /* add also About Icon --> need to show app's rules and developers  */
-        if(item.getItemId() == R.id.menu_about) {
+        if (item.getItemId() == R.id.menu_about) {
 
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
             intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) mAdapter.chosenFavorites());
@@ -123,8 +132,8 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
     @Override
     public void onSelect(int size) {
 
-        if(mActionMode != null) {
-            if(size == 0) {
+        if (mActionMode != null) {
+            if (size == 0) {
                 mActionMode.finish();
             }
             return;
@@ -133,10 +142,12 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
     }
 
-     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.getMenuInflater().inflate(R.menu.menu_context, menu);
+
+            isInActionMode = true;
 
             return true;
         }
@@ -150,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 
-            if(item.getItemId() == R.id.mn_cont_favor) {
+            if (item.getItemId() == R.id.mn_cont_favor) {
 
                 mAdapter.fillFavorPkmonList();
 
@@ -169,6 +180,9 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
+
+            isInActionMode = false;
+
             mAdapter.deselectAll();
             mActionMode = null;
         }
@@ -185,6 +199,32 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         mAdapter.getFilter().filter(newText);
 
         return false;
+    }
+
+    /* new add */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("ActionMode", isInActionMode);
+
+        outState.putParcelableArrayList("pokemonList", (ArrayList<? extends Parcelable>) mAdapter.getPokemonList());
+        outState.putParcelableArrayList("favorPkmnList", (ArrayList<? extends Parcelable>) mAdapter.getFavorPkmnList());
+        outState.putParcelable("myBooleanArray", new SparseBooleanArrayParcelable(mAdapter.getSelectedList()));
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        List<Pokemon> pokemons = savedInstanceState.getParcelableArrayList("pokemonList");
+        List<Pokemon> choices = savedInstanceState.getParcelableArrayList("favorPkmnList");
+        SparseBooleanArray array = (SparseBooleanArray) savedInstanceState.getParcelable("myBooleanArray");
+
+        mAdapter.setPokemonList(pokemons);
+        mAdapter.setFavorPkmnList(choices);
+        mAdapter.setSparseBooleanArray(array);
+
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
 }

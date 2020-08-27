@@ -1,7 +1,6 @@
 package it.lorenzotanzi.pokedex;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -29,7 +28,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import it.lorenzotanzi.pokedex.cache.FromUrlToBitmap;
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
@@ -441,4 +439,25 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         }
 
     }
+
+    public List<Pokemon> getPokemonList(){
+        return pokemonList;
+    }
+
+    public List<Pokemon> getFavorPkmnList(){
+        return favorPkmnList;
+    }
+
+    public SparseBooleanArray getSelectedList(){
+        return selectedList;
+    }
+
+    public void setFavorPkmnList(List<Pokemon> pokemons){
+        favorPkmnList = pokemons;
+    }
+
+    public void setSparseBooleanArray(SparseBooleanArray array){
+        selectedList = array;
+    }
+
 }
