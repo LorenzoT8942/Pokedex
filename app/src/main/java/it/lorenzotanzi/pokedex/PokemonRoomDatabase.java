@@ -17,7 +17,7 @@ public abstract class PokemonRoomDatabase extends RoomDatabase {
             synchronized (PokemonRoomDatabase.class){
                 if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(), PokemonRoomDatabase.class, "pokemon_database")
-                            .fallbackToDestructiveMigration().allowMainThreadQueries().build(); // added fallback because of problem after entity's attribute update
+                            /*.fallbackToDestructiveMigration()*/.allowMainThreadQueries().build(); // added fallback because of problem after entity's attribute update
                 }
             }
         }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ import java.util.List;
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 
 // deve implementare anche searchView.setOnQueryTextListener -- REGOLI'S OBBLIGATION
-public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener{
 
     private MainViewModel mViewModel;
     private RecyclerView mRecyclerView;
