@@ -58,11 +58,11 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         initObservers();
         initRecyclerView();
 
-        /* creazione cartella dove andranno salvate le immagini di front-default dei pokemon in locale */
-        File imgCacheFolder = new File(getCacheDir() + "/pokemons");
-        if (!imgCacheFolder.exists()) {
-            imgCacheFolder.mkdir();
-        }
+//        /* creazione cartella dove andranno salvate le immagini di front-default dei pokemon in locale */
+//        File imgCacheFolder = new File(getCacheDir() + "/pokemons");
+//        if (!imgCacheFolder.exists()) {
+//            imgCacheFolder.mkdir();
+//        }
 
     }
 
@@ -71,9 +71,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         mRecyclerView = findViewById(R.id.rv_pkmn);
         mRecyclerView.setHasFixedSize(true); // new add for filter search
         mLayoutManager = new LinearLayoutManager(this);
-//        DividerItemDecoration itemDecorator = (new DividerItemDecoration(MainActivity.this, DividerItemDecoration.VERTICAL));
-//        itemDecorator.setDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.rv_divider));
-//        mRecyclerView.addItemDecoration(itemDecorator);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new PokemonRvAdapter(R.layout.cardview_pokemon_detail, MainActivity.this);
         mRecyclerView.setAdapter(mAdapter);
@@ -171,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
                 TextView text = view.findViewById(android.R.id.message);
                 text.setTextColor(Color.RED);
                 toast.show();
-
                 mode.finish();
 
             }

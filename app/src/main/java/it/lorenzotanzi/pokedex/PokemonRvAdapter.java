@@ -28,6 +28,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import it.lorenzotanzi.pokedex.cache.FromUrlToBitmap;
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
@@ -88,7 +89,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
     void setPokemonList(List<Pokemon> pokemons){
         pokemonList = pokemons;
-
         /* new add necessary for filter search */
         supportPokemonList = new ArrayList<>(pokemonList);
 
@@ -109,9 +109,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         reordering();
 
         return new ViewHolder(cv);
-
-        //return new ViewHolder(v);
-
     }
 
     @SuppressLint({"CheckResult", "ResourceAsColor"})
@@ -144,32 +141,20 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
         iv_pkmn_icon.setImageResource(R.drawable.pokeball); // new add
 
-        final String imgPkmnUrl = pokemonList.get(position).getImg(); // new add
+        //final String imgPkmnUrl = pokemonList.get(position).getImg(); // new add
 
+        Picasso.get()
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemonList.get(position).getPkmnNum() + ".png")
+                .placeholder(R.drawable.pokeball)
+                .error(R.drawable.pokeball)
+                .into(iv_pkmn_icon);
 
-        /*if(pokemonList.get(position).getImg().equals("")) {
-            //REQUEST .PNG OF THE POKEMON SPRITE TO SET
-            RequestOptions requestOptions = new RequestOptions();
-            requestOptions.placeholder(R.drawable.pokeball);
-            requestOptions.error(R.drawable.pokeball);
-            Glide.with(context)
-                    .setDefaultRequestOptions(requestOptions)
-                    .asBitmap()
-                    .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + (position + 1) + ".png")
-                    .into(iv_pkmn_icon);
-
-        }else{ *//* al posto di questo richiamare il codice di salvataggio dell'immagine in locale
-                * (come in FavoritePokemon) magari creando una classe a parte e richiamarla con una new *//*
-            iv_pkmn_icon.setImageResource(R.drawable.pokeball);
-            Glide.with(context).load(pokemonList.get(position).getImg()).into(iv_pkmn_icon);
-        }*/
-
-        File pokeImg = new File(context.getCacheDir() + "/pokemons" + "/" + pokemonList.get(position).getPkmnName() + ".png");
-        if(!pokeImg.exists()) {
-            new FromUrlToBitmap(iv_pkmn_icon, position, context, pokemonList, 1).execute(imgPkmnUrl);
-        }else{
-            Glide.with(context).load(pokeImg).into(iv_pkmn_icon);
-        }
+//        File pokeImg = new File(context.getCacheDir() + "/pokemons" + "/" + pokemonList.get(position).getPkmnName() + ".png");
+//        if(!pokeImg.exists()) {
+//            new FromUrlToBitmap(iv_pkmn_icon, position, context, pokemonList, 1).execute(imgPkmnUrl);
+//        }else{
+//            Glide.with(context).load(pokeImg).into(iv_pkmn_icon);
+//        }
 
         //STRING ADJUSTMENTS
         if (Integer.parseInt(idString) < 10) idString = new StringBuilder().append("#00").append(idString).toString();

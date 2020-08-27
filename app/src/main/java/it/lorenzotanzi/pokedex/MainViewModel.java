@@ -35,5 +35,9 @@ public class MainViewModel extends AndroidViewModel {
         repository.insert(pokemon);
     }
 
+    void findPokemon (String name) {
+        repository.findPokemon(name);
+    }
+
 
 }

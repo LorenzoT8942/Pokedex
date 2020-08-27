@@ -30,14 +30,7 @@ class PokemonRepository {
     private PokemonDao pokemonDao;
     private RequestQueue requestQueue;
     private LiveData<List<Pokemon>> allPokemons;
-    private MutableLiveData<List<Pokemon>> searchResults = new MutableLiveData<>();
-
-    //public int count; // necessary for correct execution of EndUpdateFavorPokemonAsyncTask
-
-    //private List<Pokemon> favoritesPokemonList = new ArrayList<>(); // needed for last async method added
-    //private PokemonRvAdapter pokeAdapt;
-
-
+    private MutableLiveData<List<Pokemon>> searchResults;
 
     //CONSTRUCTOR:
     PokemonRepository(Application application) {
@@ -52,68 +45,32 @@ class PokemonRepository {
         allPokemons = pokemonDao.getAllPokemons();
         Log.d("REPO", "Pokemon list obtained from DB");
         initDatabase();
+        searchResults  = new MutableLiveData<>();
 
     }
-
-    /* FORSE SERVE INSTANZIARE UN COSTRUTTORE DI DEFAULT PER RICHIAMARE SOLO LA DAO DALLE ALTRE
-     * CLASSI SENZA DOVER RE-INIZIALIZZARE IL DB */
-
-    /*PokemonRepository() {
-        *//* forse conviene fare la new di PokemonRvAdapter per fargli effettuare gli ultimi due passaggi
-         * della 'fillFavorPkmnList'*//*
-
-        *//*PokemonRoomDatabase db = PokemonRoomDatabase.getDatabase(context);
-        reserveDao = db.pokemonDao();*//*
-
-        //pokeAdapt = new PokemonRvAdapter(); // add for testing Repository
-    }*/
 
     //METODO NECESSARIO ALLA CLASSE VIEW MODEL PER OTTENERE LA LISTA POKEMON
     LiveData<List<Pokemon>> getAllPokemons() {
         return allPokemons;
     }
 
-
-    //METODO NECESSARIO ALLA CLASSE VIEW MODEL PER OTTENERE LA LISTA POKEMON OTTENUTI
-    //ATTRAVERSO RICERCA
-
     MutableLiveData<List<Pokemon>> getSearchResults() {
         return searchResults;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-   /* List<Pokemon> getFavorites(Boolean bool) {
-        new GetFavorsPokemonAsyncTask(pokemonDao).execute(bool);
-
-        return favoritesPokemonList; // probably problem here
-    }*/
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*void updateFavorites(Pokemon pokemon) {
-        new UpdateFavorPokemonAsyncTask(pokemonDao).execute(pokemon);
-    }*/
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*void finishUpdates() {
-        while(count != 0){}
-        new EndUpdateFavorPokemonAsyncTask().execute();
-    }*/
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
     /*METODO CHE PRENDE IN INPUT UN'ISTANZA DELLA CLASSE POKEMON. NECESSARIA PER INSERIRE
-     * UN NUOVO POKEMON NEL DATABASE TRAMITE ASYNC TASK E QUINDI IN MODO ASINCRONO RISPETTO AL MAIN THREAD*/
+     UN NUOVO POKEMON NEL DATABASE TRAMITE ASYNC TASK E QUINDI IN MODO ASINCRONO RISPETTO AL MAIN THREAD*/
     void insert(Pokemon pokemon) {
-        new InsertPokemonAsyncTask(pokemonDao).execute(pokemon); // con la execute viene eseguito 'doInBackround'
+        new InsertPokemonAsyncTask(pokemonDao).execute(pokemon);
     }
 
-    /*  */
     void initDatabase() {
-        new checkDatabaseAT(pokemonDao).execute(requestQueue); //(?)
+        new checkDatabaseAT(pokemonDao).execute(requestQueue);
     }
+
+//    private void checkDbFinished(Integer result) {
+//        int checkDB = result;
+//    }
 
 //ASYNC TASKS RESPONSIBLE FOR QUERIES
 
@@ -121,30 +78,35 @@ class PokemonRepository {
         searchResults.setValue(pokemons);
     }
 
-    private void checkDbFinished(Integer result) {
-        int checkDB = result;
+    public void findPokemon(String name){
+       FindPokemonsAsyncTask task = new FindPokemonsAsyncTask(pokemonDao);
+       task.delegate = this;
+       task.execute(name);
+
     }
 
+
     //QUERIES THE DB AND STORES THE RESULT IN searchResults
-//    private static class FindPokemonsAsyncTask extends AsyncTask<String, Void, List<Pokemon>>{
-//
-//        private PokemonDao asyncTaskDao;
-//        private PokemonRepository delegate;
-//
-//        public FindPokemonsAsyncTask(PokemonDao asyncTaskDao){
-//            this.asyncTaskDao = asyncTaskDao;
-//        }
-//
-//        @Override
-//        protected List<Pokemon> doInBackground(String... strings) {
-//            return asyncTaskDao.findPokemon(strings[0]);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(List<Pokemon> result) {
-//            delegate.asyncFinished(result);
-//        }
-//    }
+    private static class FindPokemonsAsyncTask extends AsyncTask<String, Void, List<Pokemon> >{
+
+        private PokemonDao asyncTaskDao;
+        private PokemonRepository delegate;
+
+        public FindPokemonsAsyncTask(PokemonDao dao){
+            this.asyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<Pokemon> doInBackground(String... params) {
+            return asyncTaskDao.findPokemon(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<Pokemon> result) {
+            delegate.asyncFinished(result);
+        }
+    }
+
 
     //QUERIES THE DB TO CHECK IF IT EMPTY OR NOT
     private static class checkDatabaseAT extends AsyncTask<RequestQueue, Void, /*List<Pokemon>*/Integer> {
@@ -240,72 +202,4 @@ class PokemonRepository {
             return null;
         }
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*@SuppressLint("StaticFieldLeak")
-    private class UpdateFavorPokemonAsyncTask extends AsyncTask<Pokemon, Void, Void> {
-
-        private PokemonDao asyncTaskDao;
-
-        UpdateFavorPokemonAsyncTask(PokemonDao dao) {
-            asyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(Pokemon... params) {
-            asyncTaskDao.setFavorite(params[0]);
-            return null;
-        }
-
-        @Override
-        public void onPostExecute(Void nada){
-            super.onPostExecute(nada);
-
-            PokemonRepository.this.count --;
-
-        }
-
-    }*/
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*@SuppressLint("StaticFieldLeak")
-    private class EndUpdateFavorPokemonAsyncTask extends AsyncTask<Void, Void, Void> {
-
-
-        EndUpdateFavorPokemonAsyncTask() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            PokemonRepository.this.pokeAdapt.endFillFavorPkmnList();
-            return null;
-        }
-    }*/
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*@SuppressLint("StaticFieldLeak")
-    private class GetFavorsPokemonAsyncTask extends AsyncTask<Boolean, Void, Void> {
-
-        private PokemonDao asyncTaskDao;
-
-        GetFavorsPokemonAsyncTask(PokemonDao dao) {
-            asyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(Boolean... params) {
-
-            List<Pokemon> testList;
-            //PokemonRepository.this.favoritesPokemonList = new ArrayList<>();
-            while(asyncTaskDao == null){}
-            testList = asyncTaskDao.getAllFavorites(params[0]);
-            PokemonRepository.this.favoritesPokemonList = testList;
-
-            return null;
-        }
-
-    }*/
 }

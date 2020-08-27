@@ -22,8 +22,7 @@ public interface PokemonDao {
     LiveData<List<Pokemon>> getAllPokemons();
 
     @Query("SELECT * FROM Pokemon WHERE name LIKE :name ") // sfruttare questo ma con l'id per lo switch tra icon free - capt
-    //List<Pokemon> findPokemon(String name); // ERRORE - bisogna inserire il parametro (VARIANTE = findPokemonById)
-    Pokemon findPokemon(String name);
+    List<Pokemon> findPokemon(String name);
 
 
     @Query("SELECT * FROM Pokemon LIMIT 1")
