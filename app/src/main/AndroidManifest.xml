@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FavoritesPokemonActivity" />
+        <activity
+            android:name=".FavoritesPokemonActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".Details" />
         <activity android:name=".AboutActivity" />
 
