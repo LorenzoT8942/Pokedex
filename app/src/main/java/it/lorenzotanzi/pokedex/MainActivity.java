@@ -37,6 +37,8 @@ import java.util.List;
 
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 
+// questo e un commento
+
 // deve implementare anche searchView.setOnQueryTextListener -- REGOLI'S OBBLIGATION
 public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener{
 
