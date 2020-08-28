@@ -26,7 +26,6 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
     private ActionMode mActionMode;
     private FavoritesPokemonRvAdapter favoritesAdapter;
     List<Pokemon> favoritesList = new ArrayList<>();
-    List<String> list = new ArrayList<>();
 
     private boolean isInActionMode = false;
     private MediaPlayer mp;
