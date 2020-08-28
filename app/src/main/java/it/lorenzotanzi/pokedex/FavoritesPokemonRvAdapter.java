@@ -287,7 +287,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
             favorites.removeAll(favorites);
             supportPokemonList.removeAll(supportPokemonList); // new add for bug during deleting and then research
             notifyDataSetChanged();
-
+            notifyItemRangeRemoved(0, favorites.size());
             selectedList.clear();
         }
     }
@@ -304,10 +304,12 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
                 favorites.get(index).setFavorites(false);
                 pokemonDao.setFavorite(favorites.get(index));
                 remove(index);
+                notifyItemRangeRemoved(0, selectedList.size());
             }
         }
         selectedList.clear();
         notifyDataSetChanged();
+        //notifyItemRangeRemoved(0, selectedList.size());
     }
 
 
@@ -315,6 +317,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         supportPokemonList.remove(position); // new add for bug during deleting and then research
         favorites.remove(position);
         notifyItemRemoved(position);
+        notifyItemRangeRemoved(0, selectedList.size());
     }
 
 
