@@ -77,11 +77,13 @@ public class AboutActivity extends AppCompatActivity {
             Intent intent = new Intent(this, FavoritesPokemonActivity.class);
             intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) favoritesList);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
 
         if(item.getItemId() == R.id.menu_home){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
         return true;

@@ -80,6 +80,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         if(item.getItemId() == R.id.menu_home){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
 
         if(item.getItemId() == R.id.menu_del_all){
@@ -93,6 +94,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
             intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) favoritesList);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         }else{
 

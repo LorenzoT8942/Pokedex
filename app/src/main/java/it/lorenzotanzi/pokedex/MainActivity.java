@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
             Intent intent = new Intent(MainActivity.this, FavoritesPokemonActivity.class);
             intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) mAdapter.chosenFavorites());
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
         /* add also About Icon --> need to show app's rules and developers  */
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
             intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) mAdapter.chosenFavorites());
             startActivity(intent);
-
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
 
         return true;
