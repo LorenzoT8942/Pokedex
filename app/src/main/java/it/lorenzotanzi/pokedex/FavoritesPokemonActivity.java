@@ -26,6 +26,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
     private ActionMode mActionMode;
     private FavoritesPokemonRvAdapter favoritesAdapter;
     List<Pokemon> favoritesList = new ArrayList<>();
+    List<String> list = new ArrayList<>();
 
     private boolean isInActionMode = false;
     private MediaPlayer mp;
@@ -91,6 +92,8 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
 
             favoritesAdapter.removeAllFavorites();
 
+            favoritesAdapter.notifyDataSetChanged();
+
             mp.start();
 
         }
@@ -142,6 +145,9 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
             if(item.getItemId() == R.id.mn_cont_del_favor){
 
                 favoritesAdapter.deleteSelected();
+
+                favoritesAdapter.notifyDataSetChanged(); // TEST
+
                 mp.start();
                 mode.finish();
 
