@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mp = MediaPlayer.create(MainActivity.this, R.raw.pikachu_happy);
+
         if (savedInstanceState != null && savedInstanceState.getBoolean("ActionMode", false)) {
             startSupportActionMode(mActionModeCallback);
         }
@@ -178,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
                 toast.show();
                 mode.finish();
 
-                mp = MediaPlayer.create(MainActivity.this, R.raw.pikachu_happy);
                 mp.start();
             }
 

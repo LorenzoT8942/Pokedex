@@ -1,6 +1,7 @@
 package it.lorenzotanzi.pokedex;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.SparseBooleanArray;
@@ -27,11 +28,14 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
     List<Pokemon> favoritesList = new ArrayList<>();
 
     private boolean isInActionMode = false;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_pokemon);
+
+        mp = MediaPlayer.create(this, R.raw.pikachu_angry);
 
         if (savedInstanceState != null && savedInstanceState.getBoolean("ActionMode", false)) {
             startSupportActionMode(mActionModeCallback);
@@ -87,6 +91,8 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
 
             favoritesAdapter.removeAllFavorites();
 
+            mp.start();
+
         }
         /* ci va la condizione dell'About */
         if(item.getItemId() == R.id.menu_about) {
@@ -136,6 +142,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
             if(item.getItemId() == R.id.mn_cont_del_favor){
 
                 favoritesAdapter.deleteSelected();
+                mp.start();
                 mode.finish();
 
             }
