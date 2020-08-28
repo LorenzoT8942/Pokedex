@@ -11,7 +11,7 @@
 
         <!-- change color of options menu -->
         <item name="android:itemBackground">@color/newPokedexColor</item>
-        <item name="android:textColor">@color/light</item>
+        <!-- <item name="android:textColor">@color/light</item> -->
 
 
 
