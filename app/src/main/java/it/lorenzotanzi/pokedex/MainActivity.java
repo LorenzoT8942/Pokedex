@@ -7,9 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -27,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
     private ActionMode mActionMode; // new add for menu
 
     private boolean isInActionMode = false;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +178,10 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
                 toast.show();
                 mode.finish();
 
+                mp = MediaPlayer.create(MainActivity.this, R.raw.pikachu_happy);
+                mp.start();
             }
+
             return true;
         }
 
