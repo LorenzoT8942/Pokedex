@@ -15,8 +15,8 @@
     <string name="exp">Esperienza base:</string>
     <string name="stats">Statistiche:</string>
     <string name="speed">Velocità</string>
-    <string name="special_defense">Speciale difesa</string>
-    <string name="special_attack">Speciale attacco</string>
+    <string name="special_defense">Difesa Speciale</string>
+    <string name="special_attack">Attacco Speciale</string>
     <string name="defense">Difesa</string>
     <string name="attack">Attacco</string>
     <string name="health">Salute</string>
