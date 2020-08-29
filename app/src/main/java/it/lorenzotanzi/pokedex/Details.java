@@ -91,7 +91,7 @@ public class Details extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.ivPokeball);
         ConstraintLayout cl = findViewById(R.id.clGeneral);
 
-        //STRING ADJUSTMENTS
+        //Aggiustamento della stringa id
         if (Integer.parseInt(id) < 10) id = new StringBuilder().append("#00").append(id).toString();
         else if (Integer.parseInt(id) < 100)
             id = new StringBuilder().append("#0").append(id).toString();
@@ -99,16 +99,16 @@ public class Details extends AppCompatActivity {
         textView.setText(id);
 
         String type1col = colors.get(type1);
-        //SETTING IMAGE VIEW OF TYPE 1
+        //imageView settata al tipo1
         String _type1str = type1.substring(0,1).toLowerCase() + type1.substring(1);
         int index = this.getResources().getIdentifier(_type1str , "drawable", this.getPackageName());
         imageView1.setImageResource(index);
 
 
 
-        //SE IL POKEMON IN POSIZIONE position HA UN TIPO 2 ALLORA VIENE SETTATO IL TESTO DELLA IMAGE VIEW
-        //imageView2 E VIENE CREATA UNA NUOVA ISTANZA DI GradientDrawable CHE VERRA' USATA COME
-        //BACKGROUND DELLA DETAILS
+        //se il pokemonn in posizione position ha un tipo2 allora viene settato il testo della imageView
+        //imageView2 e viene creata una nuova istanza si GradientDrawable che verrà usata come
+        //background della Details
 
         if (type2 != null) {
             String type2col = colors.get(type2);
@@ -128,7 +128,7 @@ public class Details extends AppCompatActivity {
             window.setBackgroundDrawable(gd);
         } else {
             /*Se invece il Pokemon ha un solo tipo viene settata la ImageView imageView2 come "invisible"
-             * e viene settato la sfondo della card view al colore  dell'unico tipo relativo al Pokemon*/
+            e viene settato la sfondo della card view al colore  dell'unico tipo relativo al Pokemon*/
             imageView2.setVisibility(View.INVISIBLE);
             int backgroundColor = Color.parseColor(type1col);
             cl.setBackgroundColor(backgroundColor);
