@@ -116,7 +116,7 @@ public class Details extends AppCompatActivity {
 
             String _type2str = type2.substring(0,1).toLowerCase() + type2.substring(1);
             int id2 = this.getResources().getIdentifier(_type2str , "drawable", this.getPackageName());
-            int [] gradientColors = {Color.parseColor((type1col)), Color.parseColor(type2col)}; // PROBLEMA QUI
+            int [] gradientColors = {Color.parseColor((type1col)), Color.parseColor(type2col)};
             GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
             gd.setGradientType(GradientDrawable.LINEAR_GRADIENT);
             gd.setCornerRadius(30);
@@ -127,8 +127,8 @@ public class Details extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setBackgroundDrawable(gd);
         } else {
-            /*SE INVECE IL POKEMON HA UN SOLO TIPO VIENE SETTATA LA IMAGE VIEW imageView2 COME "INVISIBLE"
-             * E VIENE SETTATO LO SFONDO DELLA CARD VIEW AL COLORE DELL'UNICO TIPO RELATIVO AL POKEMON*/
+            /*Se invece il Pokemon ha un solo tipo viene settata la ImageView imageView2 come "invisible"
+             * e viene settato la sfondo della card view al colore  dell'unico tipo relativo al Pokemon*/
             imageView2.setVisibility(View.INVISIBLE);
             int backgroundColor = Color.parseColor(type1col);
             cl.setBackgroundColor(backgroundColor);
