@@ -305,13 +305,11 @@
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="200dp"
                     android:layout_height="10dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="119dp"
                     android:layout_marginTop="25dp"
-                    android:layout_marginEnd="8dp"
                     android:progressBackgroundTint="@color/light"
                     android:progressTint="@color/green"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.81"
                     app:layout_constraintLeft_toRightOf="@id/tvSpecDef"
                     app:layout_constraintStart_toStartOf="@id/tvSpecDef"
                     app:layout_constraintTop_toBottomOf="@+id/pbSpecAttBar" />
@@ -335,7 +333,7 @@
                     android:id="@+id/tvHealth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/dosis_semibold"
                     android:text="@string/health"
@@ -347,7 +345,7 @@
                     android:id="@+id/tvAtt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/dosis_semibold"
                     android:text="@string/attack"
@@ -359,7 +357,7 @@
                     android:id="@+id/tvDef"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/dosis_semibold"
                     android:text="@string/defense"
@@ -371,8 +369,8 @@
                     android:id="@+id/tvSpecAtt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/dosis_semibold"
                     android:text="@string/special_attack"
                     android:textSize="20sp"
@@ -383,7 +381,7 @@
                     android:id="@+id/tvSpecDef"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/dosis_semibold"
                     android:text="@string/special_defense"
@@ -395,7 +393,7 @@
                     android:id="@+id/tvSpeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/dosis_semibold"
                     android:text="@string/speed"
@@ -412,7 +410,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/pbHealthBar"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_constraintHorizontal_bias="0.333" />
+                    app:layout_constraintHorizontal_bias="0.333" />
 
                 <TextView
                     android:id="@+id/tvStat2"
@@ -423,7 +421,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/pbAttBar"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_constraintHorizontal_bias="0.333" />
+                    app:layout_constraintHorizontal_bias="0.333" />
 
                 <TextView
                     android:id="@+id/tvStat3"
@@ -434,7 +432,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/pbDefBar"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_constraintHorizontal_bias="0.333" />
+                    app:layout_constraintHorizontal_bias="0.333" />
 
                 <TextView
                     android:id="@+id/tvStat4"
@@ -445,36 +443,32 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/pbSpecAttBar"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_constraintHorizontal_bias="0.333" />
+                    app:layout_constraintHorizontal_bias="0.333" />
 
                 <TextView
                     android:id="@+id/tvStat5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="156dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="160dp"
+                    android:layout_marginEnd="28dp"
                     android:fontFamily="@font/dosis"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.771"
+                    app:layout_constraintHorizontal_bias="0.333"
                     app:layout_constraintStart_toEndOf="@+id/pbSpecDefBar"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_constraintHorizontal_bias="0.333" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvStat6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:layout_marginTop="90dp"
                     android:fontFamily="@font/dosis"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.333"
                     app:layout_constraintStart_toEndOf="@id/pbSpeedBar"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.818"
-                    tools:layout_constraintHorizontal_bias="0.333"
-                    tools:layout_constraintVertical_bias="0.909" />
+                    app:layout_constraintVertical_bias="0.909" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <FrameLayout

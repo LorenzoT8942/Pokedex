@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="menu_search" translatable="false">Cerca</string>
+    <string name="menu_favor">Preferiti</string>
+    <string name="menu_del_all">Libera tutti</string>
+    <string name="menu_all_fav">Aggiungi tutti ai preferiti</string>
+    <string name="mn_cont_favor">Aggiungi ai preferiti</string>
+    <string name="mn_cont_del_favor">Cancella dai preferiti</string>
+    <string name="tv_developers">Sviluppatori</string>
+    <string name="types">Tipi:</string>
+    <string name="general_info">Informazioni generali:</string>
+    <string name="height">Altezza:</string>
+    <string name="weight">Peso:</string>
+    <string name="exp">Esperienza base:</string>
+    <string name="stats">Statistiche:</string>
+    <string name="speed">Velocità</string>
+    <string name="special_defense">Speciale difesa</string>
+    <string name="special_attack">Speciale attacco</string>
+    <string name="defense">Difesa</string>
+    <string name="attack">Attacco</string>
+    <string name="health">Salute</string>
+    <string name="abilities">Abilità:</string>
+    <string name="moves">Mosse:</string>
+</resources>

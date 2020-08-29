@@ -140,6 +140,8 @@ public class Details extends AppCompatActivity {
 
 
         Glide.with(this).load(img).into(imageView);
+        //Aggiustamento della stringa nome
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
         textView1.setText(name);
 
 
