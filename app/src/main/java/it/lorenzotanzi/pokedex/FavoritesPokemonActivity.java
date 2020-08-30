@@ -34,7 +34,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_pokemon);
 
-        mp = MediaPlayer.create(this, R.raw.pikachu_angry);
+        mp = MediaPlayer.create(this, R.raw.pikachu_sad);
 
         /* re-creation of contextual menu after device rotation */
         if (savedInstanceState != null && savedInstanceState.getBoolean("ActionMode", false)) {
