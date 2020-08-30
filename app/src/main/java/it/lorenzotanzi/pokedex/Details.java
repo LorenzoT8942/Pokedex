@@ -69,7 +69,7 @@ public class Details extends AppCompatActivity {
         colors.put("Steel", "#B7B7CE");
         colors.put("Fairy", "#D685AD");
 
-
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_bottom); /* NEW ADD */
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
@@ -150,6 +150,15 @@ public class Details extends AppCompatActivity {
         task.execute();
 
     }
+
+    /* NEW ADD */
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_bottom);
+    }
+
 }
 
 
