@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -173,10 +174,10 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         /* if pokemon selected in contextual menu then color it's CardView for show it up */
         boolean isSelected = selectedList.get(position,false);
         if(isSelected) {
-            cardView.setBackgroundColor(Color.LTGRAY);
-            cardView.setSelected(false);
-        } else {
             cardView.setSelected(true);
+            cardView.setBackgroundColor(Color.LTGRAY);
+        } else {
+            cardView.setSelected(false);
         }
 
     }

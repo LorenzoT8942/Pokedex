@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -206,6 +207,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         if(isSelected) {
             cardView.setSelected(true);
             cardView.setBackgroundColor(Color.LTGRAY);
+
         } else {
             cardView.setSelected(false);
         }
