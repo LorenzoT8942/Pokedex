@@ -45,7 +45,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     private SparseBooleanArray selectedList = new SparseBooleanArray();
     private List<Pokemon> favorPkmnList = new ArrayList<>(); // need for not sure choices
     private List<Pokemon> supportFavorPkmnList; // need for confermed choices - removed redundant initializer
-    private PokemonDao pokemonDao; // new add
+    private PokemonDao pokemonDao;
 
     //private PokemonRepository pokeRepo;
 
@@ -54,7 +54,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     PokemonRvAdapter(int layoutId, Context context){
         pokemonItemLayout = layoutId;
         this.context = context;
-        mListener = (SelectMode) context;
+        mListener = (SelectMode) context; /* MainActivity */
         PokemonRoomDatabase db = PokemonRoomDatabase.getDatabase(this.context);
         pokemonDao = db.pokemonDao();
         // problema qui
@@ -90,6 +90,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
     void setPokemonList(List<Pokemon> pokemons){
         pokemonList = pokemons;
+
         /* new add necessary for filter search */
         supportPokemonList = new ArrayList<>(pokemonList);
 
@@ -97,7 +98,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     }
 
 
-    // alla seconda iterazione quando parte (da preferiti a main) bisogna fillare la favorite list dal db
     @NonNull
     @Override
     public PokemonRvAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -133,16 +133,9 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
        String type2str = pokemonList.get(position).getType2();
        String type1col = colors.get(type1str);
 
-       /* aggiungere il fetch della immagine (vedere PokemonRepository) */
+        iv_pkmn_icon.setImageResource(R.drawable.pokeball);
 
-
-        // problema qui all'atto della ricerca dinamica (FILTER SEARCH) poichè viene aggiunta l'immagine
-        // in base al numero e non al nome conviene salvare l'immagine in locale e fare poi il fetch da
-        // lì in base al nome come fatto per i 'FavoritesPokemonRvAdapter'
-
-        iv_pkmn_icon.setImageResource(R.drawable.pokeball); // new add
-
-        //final String imgPkmnUrl = pokemonList.get(position).getImg(); // new add
+        //final String imgPkmnUrl = pokemonList.get(position).getImg();
 
         Picasso.get()
                 .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemonList.get(position).getPkmnNum() + ".png")
@@ -150,6 +143,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
                 .error(R.drawable.pokeball)
                 .into(iv_pkmn_icon);
 
+          /* if pokemon's image not in cache then download it, else load it into the pokemon's ImageView */
 //        File pokeImg = new File(context.getCacheDir() + "/pokemons" + "/" + pokemonList.get(position).getPkmnName() + ".png");
 //        if(!pokeImg.exists()) {
 //            new FromUrlToBitmap(iv_pkmn_icon, position, context, pokemonList, 1).execute(imgPkmnUrl);
@@ -173,13 +167,10 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         iv_pkmn_type1.setImageResource(id);
         Log.d("ADAPTER", "Pokemon " + idString + "drawable 1 id:" + Integer.toString(id));
 
+        /* needed in order to discriminate favorite pokemons from normal pokemon */
         if(!pokemonList.get(position).getFavorite()) {
             iv_pkmn_status.setImageResource(R.drawable.ic_pkm_free);
         } else{
-            // forse si può levare
-            if(!favorPkmnList.contains(pokemonList.get(position))){
-                if(!supportFavorPkmnList.contains(pokemonList.get(position))) {}
-            }
             iv_pkmn_status.setImageResource(R.drawable.ic_pkm_capt);
         }
 
@@ -209,8 +200,8 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
             int backgroundColor = Color.parseColor(type1col);
             cardView.setBackgroundColor(backgroundColor);
         }
-        
 
+        /* if pokemon selected in contextual menu then color it's CardView for show it up */
         boolean isSelected = selectedList.get(position,false);
         if(isSelected) {
             cardView.setSelected(true);
@@ -234,6 +225,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
     private Filter pokemonFilter = new Filter() {
 
+        /* collect pokemon match string's search into results.values */
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
@@ -266,6 +258,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
             return results;
         }
 
+        /* thanks to this it's possible the visualization of pokemon searched */
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
@@ -283,7 +276,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         ImageView iv_pkmn_type1;
         ImageView iv_pkmn_type2;
         View cardView;
-        ImageView iv_pkmn_status; /* new add */
+        ImageView iv_pkmn_status;
 
 
 
@@ -301,6 +294,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
     }
 
+    /* if LongPress previously then repeat onLongClick actions */
     @Override
     public void onClick(View v) {
         if(selectedList.size() > 0){
@@ -321,11 +315,10 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     }
 
 
+    /* management of contextual menu's actions */
     @Override
     public boolean onLongClick(View v) {
 
-
-        // into final for testing with db adn dao
         final int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
 
         boolean isSel = selectedList.get(position, false);
@@ -412,7 +405,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     }*/
 
 
-    /* necessario per eliminare i duplicati */
+    /* delete double and update pokemonList */
     public void reordering(){
 
         for(int position = 0; position < supportFavorPkmnList.size(); position++){

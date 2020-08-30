@@ -48,8 +48,8 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
         InputStream inputStream;
         try {
 
-            inputStream = new java.net.URL(stringUrl).openStream();
-            bitmap = BitmapFactory.decodeStream(inputStream);
+            inputStream = new java.net.URL(stringUrl).openStream(); /* fetch stream from net */
+            bitmap = BitmapFactory.decodeStream(inputStream); /* convert stream into bitmap */
 
         }catch (IOException e){
             e.printStackTrace();
@@ -64,8 +64,7 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
         super.onPostExecute(bitmap);
         imageView.setImageBitmap(bitmap);
 
-        /* conviene salvare l'immagine scaricata in locale per poi non dover ripetere
-         * più l'accesso ad internet */
+        /* save image into internal storage for next accesses */
         try {
             saveImgIntoInernalStorage(bitmap, pokePosition, context, currPkmnlist, choice);
         } catch (FileNotFoundException e) {

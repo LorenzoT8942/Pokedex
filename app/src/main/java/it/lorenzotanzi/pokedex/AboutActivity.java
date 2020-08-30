@@ -24,10 +24,9 @@ import it.lorenzotanzi.pokedex.threads.LoadGeneralsThread;
 public class AboutActivity extends AppCompatActivity {
 
     List<Pokemon> favoritesList = new ArrayList<>();
-
-    ArrayList<String> generals = new ArrayList<>();
+    ArrayList<String> generals = new ArrayList<>(); /* name&surname of developers */
     ArrayList<String> emails = new ArrayList<>();
-    String fileInfo = "";
+    String fileInfo = ""; /* app's info */
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +35,7 @@ public class AboutActivity extends AppCompatActivity {
 
         favoritesList = getIntent().getParcelableArrayListExtra("favorites");
 
+        /* registration of Recivers' for threads' services */
         registerReceiver(receiver1, new IntentFilter(LoadGeneralsThread.NOTIFICATION));
         registerReceiver(receiver2, new IntentFilter(LoadFileInfoThread.NOTIFICATION));
 
@@ -91,18 +91,18 @@ public class AboutActivity extends AppCompatActivity {
 
     private void loadFile(){
 
-        Locale l = Locale.getDefault();
+        Locale l = Locale.getDefault(); /* to know local language */
         String fileContent;
 
         if(l.getCountry().compareTo("IT") == 0){
-            fileContent = String.format(l, "info-%s.txt", l.getCountry());
+            fileContent = String.format(l, "info-%s.txt", l.getCountry()); /* italian file content */
         }else{
-            fileContent = String.format(l, "info-%s.txt", "EN");
+            fileContent = String.format(l, "info-%s.txt", "EN"); /* english file content */
         }
 
         try{
-            InputStream is = getAssets().open(fileContent);
 
+            InputStream is = getAssets().open(fileContent);
             LoadFileInfoThread loadFileInfoThread = new LoadFileInfoThread(is, this);
             loadFileInfoThread.start();
 
@@ -120,6 +120,7 @@ public class AboutActivity extends AppCompatActivity {
                 generals = bundle.getStringArrayList("generals");
                 emails = bundle.getStringArrayList("emails");
 
+                /* initialization of developers layout */
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AboutActivity.this);
                 RecyclerView recyclerView = findViewById(R.id.rv_developers);
                 RecyclerView.Adapter mAdapter = new AboutAdapter(generals, emails);
@@ -136,7 +137,7 @@ public class AboutActivity extends AppCompatActivity {
             if (bundle != null){
 
                 fileInfo = bundle.getString("info");
-                new Holder();
+                new Holder(); /* initialization of app's info layout */
             }
         }
     };

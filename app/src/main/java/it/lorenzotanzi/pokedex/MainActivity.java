@@ -37,19 +37,15 @@ import java.util.List;
 
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 
-// questo e un commento
-
-// deve implementare anche searchView.setOnQueryTextListener -- REGOLI'S OBBLIGATION
 public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener{
 
     private MainViewModel mViewModel;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private PokemonRvAdapter mAdapter;
-    private ActionMode mActionMode; // new add for menu
-
-    private boolean isInActionMode = false;
-    private MediaPlayer mp;
+    private ActionMode mActionMode; /* for contextual menu's appearence */
+    private boolean isInActionMode = false; /* to preserve choices in contextual menu mode after device rotation */
+    private MediaPlayer mp; /* sound effect after deletion event */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
         mp = MediaPlayer.create(MainActivity.this, R.raw.pikachu_happy);
 
+        /* re-creation of contextual menu after device rotation */
         if (savedInstanceState != null && savedInstanceState.getBoolean("ActionMode", false)) {
             startSupportActionMode(mActionModeCallback);
         }
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         initObservers();
         initRecyclerView();
 
-//        /* creazione cartella dove andranno salvate le immagini di front-default dei pokemon in locale */
+//        /* creation of sub-directory in order to memorize favorite pokemon's images */
 //        File imgCacheFolder = new File(getCacheDir() + "/pokemons");
 //        if (!imgCacheFolder.exists()) {
 //            imgCacheFolder.mkdir();
@@ -106,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         /* ---- FOR DINAMICAL SEARCH ON SEARCH MENU ---- */
-
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -118,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        /* go to favorites' page */
         if (item.getItemId() == R.id.menu_favor) {
             Intent intent = new Intent(MainActivity.this, FavoritesPokemonActivity.class);
             intent.putParcelableArrayListExtra("favorites", (ArrayList<? extends Parcelable>) mAdapter.chosenFavorites());
@@ -125,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
-        /* add also About Icon --> need to show app's rules and developers  */
         if (item.getItemId() == R.id.menu_about) {
 
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
@@ -137,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         return true;
     }
 
-
+    /* preparation of contextual menu's actions */
     @Override
     public void onSelect(int size) {
 
@@ -161,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
             return true;
         }
 
-        // don't care
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
             return false;
@@ -203,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         return false;
     }
 
+    /* get text typed from client */
     @Override
     public boolean onQueryTextChange(String newText) {
 
@@ -211,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         return false;
     }
 
-    /* new add */
+    /* save all necessary in order to preserve actions taken a moment before device rotation */
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("ActionMode", isInActionMode);
@@ -223,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         super.onSaveInstanceState(outState);
     }
 
+    /* restore all actions taken a moment before device rotation */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
 

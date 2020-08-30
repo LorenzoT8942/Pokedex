@@ -51,15 +51,15 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
     private List<Pokemon> favorites;
     private SparseBooleanArray selectedList = new SparseBooleanArray();
     Context context;
-    private List<Pokemon> supportPokemonList;
+    private List<Pokemon> supportPokemonList; // needed for filter research
 
     FavoritesPokemonRvAdapter(Context context, List<Pokemon> choices){
         favorites = choices;
         this.context = context;
 
-        supportPokemonList = new ArrayList<>(favorites);
+        supportPokemonList = new ArrayList<>(favorites); /* support for filter research */
 
-        mListener = (SelectMode) context;
+        mListener = (SelectMode) context; /* FavoritesPokemonActivity */
 
         PokemonRoomDatabase db = PokemonRoomDatabase.getDatabase(this.context);
         pokemonDao = db.pokemonDao();
@@ -102,7 +102,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         TextView tv_pkmn_name = holder.itemView.findViewById(R.id.tv_pkmn_name);
         ImageView iv_pkmn_type1 = holder.itemView.findViewById(R.id.iv_pkmn_type1);
         ImageView iv_pkmn_type2 = holder.itemView.findViewById(R.id.iv_pkmn_type2);
-        final ImageView iv_pkmn_icon = holder.itemView.findViewById(R.id.iv_pkmn_icon); /* invece della richiesta con volley lo si preleva dalla entity */
+        final ImageView iv_pkmn_icon = holder.itemView.findViewById(R.id.iv_pkmn_icon);
         ImageView iv_pkmn_status = holder.itemView.findViewById(R.id.iv_pkmn_status);
         View cardView = holder.itemView.findViewById(R.id.cl_card);
 
@@ -112,7 +112,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         String type2str = favorites.get(position).getType2();
         String type1col = colors.get(type1str);
 
-        final String imgPkmnUrl = favorites.get(position).getImg(); /* new add */
+        final String imgPkmnUrl = favorites.get(position).getImg();
 
         //STRING ADJUSTMENTS
         if (Integer.parseInt(idString) < 10) idString = new StringBuilder().append("#00").append(idString).toString();
@@ -122,8 +122,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
 
         iv_pkmn_icon.setImageResource(R.drawable.pokeball);
 
-        // FROM URL TO BITMAP -- /* creare classe a parte in 'package: cache' in cui vi sia il costruttore
-        //                        * che implementa ciò e tutto il resto che segue inerente al salvataggio immagini */
+        /* if pokemon's image not in cache then download it, else load it into the pokemon's ImageView */
         File pokeImg = new File(context.getCacheDir() + "/favorites" + "/" + favorites.get(position).getPkmnName() + ".png");
         if(!pokeImg.exists()) {
             new FromUrlToBitmap(iv_pkmn_icon, position, context, favorites, 0).execute(imgPkmnUrl);
@@ -135,8 +134,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         tv_pkmn_num.setText(idString);
         tv_pkmn_name.setText(pkmnNameString);
 
-
-
+        /* needed in order to discriminate favorite pokemons from normal pokemon */
         if(!favorites.get(position).getFavorite()){
             iv_pkmn_status.setImageResource(R.drawable.ic_pkm_free);
         }else{
@@ -172,6 +170,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
             cardView.setBackgroundColor(backgroundColor);
         }
 
+        /* if pokemon selected in contextual menu then color it's CardView for show it up */
         boolean isSelected = selectedList.get(position,false);
         if(isSelected) {
             cardView.setBackgroundColor(Color.LTGRAY);
@@ -187,7 +186,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         return favorites == null? 0 : favorites.size();
     }
 
-    /* needed for menu operation */
+    /* if LongPress previously then repeat onLongClick actions */
     @Override
     public void onClick(View v) {
         if(selectedList.size() > 0){
@@ -208,6 +207,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
 
     }
 
+    /* management of contextual menu's actions */
     @Override
     public boolean onLongClick(View v) {
 
@@ -231,18 +231,21 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
             }
 
         if(mListener != null){
-            mListener.onSelect(selectedList.size());
+            mListener.onSelect(selectedList.size()); /* start contextual menu */
         }
         notifyDataSetChanged();
         return true;
     }
 
+    /* ---- FOR FILTER SEARCH ON SEARCH MENU ---- */
     @Override
     public Filter getFilter() {
         return pokemonFilter;
     }
 
     private Filter pokemonFilter = new Filter() {
+
+        /* collect pokemon match string's search into results.values */
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
@@ -266,6 +269,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
             return results;
         }
 
+        /* thanks to this it's possible the visualization of pokemon searched */
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
@@ -288,8 +292,6 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
 
             favorites.removeAll(favorites);
             supportPokemonList.removeAll(supportPokemonList); // new add for bug during deleting and then research
-            /*notifyDataSetChanged();
-            notifyItemRangeRemoved(0, favorites.size());*/
             selectedList.clear();
             notifyDataSetChanged();
             notifyItemRangeRemoved(0, favorites.size());
@@ -302,7 +304,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
             return;
         }
 
-        /* bug con troppi elementi - non si cancellano alcuni pokemon - se '+700' allora tutto ok */
+        /* bug with a lot of elements, if '+700' that's ok */
         for(int index = selectedList.size() + 700; index>=0; index--){
             if(selectedList.get(index, false)){
                 favorites.get(index).setFavorites(false);
@@ -313,7 +315,6 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         selectedList.clear();
         notifyItemRangeRemoved(0, selectedList.size());
         notifyDataSetChanged();
-        //notifyItemRangeRemoved(0, selectedList.size());
     }
 
 

@@ -16,12 +16,12 @@ public interface PokemonDao {
     void insertPokemon(Pokemon pokemon);
 
     @Update
-    void setFavorite(Pokemon pokemon); // necessary for update status of attribute 'favorite' in pokemon entity
+    void setFavorite(Pokemon pokemon);
 
     @Query("SELECT * FROM Pokemon ORDER BY ID")
     LiveData<List<Pokemon>> getAllPokemons();
 
-    @Query("SELECT * FROM Pokemon WHERE name LIKE :name ") // sfruttare questo ma con l'id per lo switch tra icon free - capt
+    @Query("SELECT * FROM Pokemon WHERE name LIKE :name ")
     List<Pokemon> findPokemon(String name);
 
 

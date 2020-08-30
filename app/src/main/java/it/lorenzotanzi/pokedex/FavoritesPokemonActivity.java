@@ -23,12 +23,11 @@ import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 // deve implementare anche searchView.setOnQueryTextListener -- REGOLI'S OBBLIGATION
 public class FavoritesPokemonActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener {
 
-    private ActionMode mActionMode;
+    private ActionMode mActionMode; /* for contextual menu's appearence */
     private FavoritesPokemonRvAdapter favoritesAdapter;
     List<Pokemon> favoritesList = new ArrayList<>();
-
-    private boolean isInActionMode = false;
-    private MediaPlayer mp;
+    private boolean isInActionMode = false; /* to preserve choices in contextual menu mode after device rotation */
+    private MediaPlayer mp; /* sound effect after deletion event */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +36,14 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
 
         mp = MediaPlayer.create(this, R.raw.pikachu_angry);
 
+        /* re-creation of contextual menu after device rotation */
         if (savedInstanceState != null && savedInstanceState.getBoolean("ActionMode", false)) {
             startSupportActionMode(mActionModeCallback);
         }
 
         favoritesList = getIntent().getParcelableArrayListExtra("favorites");
 
-        /* creare classe a parte in 'package: cache' in cui vi sia un metodo che implementa ciò e tutto il resto che segue inerente al
-         * salvataggio immagini */
-        /* creazione sotto-directory per memorizzare le immagini dei pokemon preferiti */
+        /* creation of sub-directory in order to memorize favorite pokemon's images */
         File imgCacheFolder = new File(getCacheDir() + "/favorites");
         if(!imgCacheFolder.exists()){
             imgCacheFolder.mkdir();
@@ -53,7 +51,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
 
         favoritesAdapter = new FavoritesPokemonRvAdapter(this, favoritesList);
 
-        /* start pattern for fill Recycle View of favorites */
+        /* initialization of favorite pokemon's layout */
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = findViewById(R.id.rv_favor_pkmn);
         recyclerView.setLayoutManager(layoutManager);
@@ -61,14 +59,12 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
 
     }
 
-    /* NEDDED FILL WITH CLASSICAL APPROACH SHOWED REGOLI */
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_favorites, menu);
 
-        /* ---- TEST FOR DINAMICAL SEARCH ON SEARCH MENU ---- */
+        /* ---- DINAMICAL SEARCH ON SEARCH MENU ---- */
         MenuItem searchItem = menu.findItem(R.id.app_bar_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -81,22 +77,24 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 
+        /* return into home page */
         if(item.getItemId() == R.id.menu_home){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
 
+
         if(item.getItemId() == R.id.menu_del_all){
 
             favoritesAdapter.removeAllFavorites();
-
             favoritesAdapter.notifyDataSetChanged();
 
             mp.start();
 
         }
-        /* ci va la condizione dell'About */
+
+        /* go to about page */
         if(item.getItemId() == R.id.menu_about) {
 
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
@@ -112,6 +110,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         return true;
     }
 
+    /* preparation of contextual menu's actions */
     @Override
     public void onSelect(int size) {
 
@@ -144,8 +143,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
             if(item.getItemId() == R.id.mn_cont_del_favor){
 
                 favoritesAdapter.deleteSelected();
-
-                favoritesAdapter.notifyDataSetChanged(); // TEST
+                favoritesAdapter.notifyDataSetChanged();
 
                 mp.start();
                 mode.finish();
@@ -159,17 +157,18 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         public void onDestroyActionMode(ActionMode mode) {
 
             isInActionMode = false;
-
             favoritesAdapter.deselectAll();
             mActionMode = null;
         }
     };
+
 
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
 
+    /* get text typed from client */
     @Override
     public boolean onQueryTextChange(String newText) {
 
@@ -178,17 +177,18 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         return false;
     }
 
-    /* new add */
+    /* save all necessary in order to preserve actions taken a moment before device rotation */
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean("ActionMode", isInActionMode);
 
+        outState.putBoolean("ActionMode", isInActionMode);
         outState.putParcelableArrayList("favorites", (ArrayList<? extends Parcelable>) favoritesAdapter.getFavorites());
         outState.putParcelable("myBooleanArray", new SparseBooleanArrayParcelable(favoritesAdapter.getSelectedList()));
 
         super.onSaveInstanceState(outState);
     }
 
+    /* restore all actions taken a moment before device rotation */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
 

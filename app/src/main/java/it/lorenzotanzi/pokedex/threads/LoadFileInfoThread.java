@@ -23,6 +23,7 @@ public class LoadFileInfoThread extends Thread{
 
     public void run(){
 
+        /* send results to AboutActivity */
         String fileInfo = loadFileInfo();
         Intent intent = new Intent(NOTIFICATION);
         intent.putExtra("info", fileInfo);
@@ -30,6 +31,7 @@ public class LoadFileInfoThread extends Thread{
 
     }
 
+    /* read from info-%s.txt and return its content */
     private String loadFileInfo(){
 
         String ret = "";

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.Holder>{
+
     private List<String> mGenerals;
     private List<String> mEmails;
 

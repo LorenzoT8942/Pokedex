@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseBooleanArray;
 
+/* needed for correct transition of a SparseBooleanArray among Activities thanks to Intent strategy */
 public class SparseBooleanArrayParcelable extends SparseBooleanArray implements Parcelable {
     public static Parcelable.Creator<SparseBooleanArrayParcelable> CREATOR = new Parcelable.Creator<SparseBooleanArrayParcelable>() {
         @Override

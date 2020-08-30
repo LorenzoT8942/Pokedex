@@ -29,13 +29,14 @@ public class LoadGeneralsThread extends Thread{
         List<String> generals = loadDevelopersGenerals();
         List<String> emails = loadDevelopersEmails();
 
-        /* bisogna inviare questo risultato alla 'AboutActivity' */
+        /* send results to AboutActivity */
         Intent intent = new Intent(NOTIFICATION);
         intent.putStringArrayListExtra("generals", (ArrayList<String>) generals);
         intent.putStringArrayListExtra("emails", (ArrayList<String>) emails);
         context.sendBroadcast(intent);
     }
 
+    /* read from 'developers.txt' into assets and return its content*/
     private List<String> loadDevelopersGenerals(){
         String singleGeneral;
         List<String> generals = new ArrayList<>();
@@ -50,6 +51,7 @@ public class LoadGeneralsThread extends Thread{
         return generals;
     }
 
+    /* read from 'email.txt' into assets and return its content */
     private List<String> loadDevelopersEmails(){
         String singleEmail;
         List<String> emails = new ArrayList<>();

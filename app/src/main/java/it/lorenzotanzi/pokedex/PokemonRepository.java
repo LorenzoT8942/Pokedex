@@ -149,8 +149,6 @@ class PokemonRepository {
                                         sType1 = sType1.substring(0, 1).toUpperCase() + sType1.substring(1);
                                         String sType2;
 
-                                        /* fare un getJSONObject di sprites su indice 4 (front_default) che servirà poi per il fill
-                                         * dei preferiti e poi quando la si preleva decodificarla in bitmap per image view del pokemon*/
                                         JSONObject sprites = response.getJSONObject("sprites");
                                         String urlPkmnImg = sprites.getString("front_default");
 
@@ -163,9 +161,7 @@ class PokemonRepository {
                                             sType2 = sType2.substring(0, 1).toUpperCase() + sType2.substring(1);
                                         }
                                         Log.d("DEB", "Id: " + newPkmnId + "Name: " + newPkmnName + "Type 1" + sType1 + "Type 2: " + sType2);
-                                        // aggiungere alla entity pokemon l'attributo della propria immagine per semplificare la FavoritePokemonRvAdapter
-                                        //Pokemon pokemon = new Pokemon(Integer.parseInt(newPkmnId), newPkmnName, sType1, sType2, false); //change last parameter for attribute favorite
-                                        Pokemon pokemon = new Pokemon(Integer.parseInt(newPkmnId), false, newPkmnName, sType1, sType2, urlPkmnImg); // new add
+                                        Pokemon pokemon = new Pokemon(Integer.parseInt(newPkmnId), false, newPkmnName, sType1, sType2, urlPkmnImg);
                                         new InsertPokemonAsyncTask(asyncTaskDao).execute(pokemon);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
