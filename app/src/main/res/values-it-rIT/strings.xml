@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Pokedex</string>
     <string name="menu_search" translatable="false">Cerca</string>
     <string name="menu_favor">Preferiti</string>
     <string name="menu_del_all">Libera tutti</string>

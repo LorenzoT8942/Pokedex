@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pokedex</string>
+    <string name="app_name" translatable="false">Pokedex</string>
     <string name="iv_pkmn_detail" translatable="false">pokemon</string>
     <string name = "menu_about" translatable="false">About</string>
     <string name = "menu_search">Search</string>
