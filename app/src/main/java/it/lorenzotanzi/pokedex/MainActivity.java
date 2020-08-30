@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
                 mAdapter.fillFavorPkmonList();
 
-                Toast toast = Toast.makeText(getApplicationContext(), "FAVORITES UPDATED", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.favorites_updated, Toast.LENGTH_SHORT);
                 View view = toast.getView();
                 view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
                 TextView text = view.findViewById(android.R.id.message);

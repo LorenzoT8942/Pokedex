@@ -26,4 +26,6 @@
     <string name="health">HP</string>
     <string name="abilities">Abilities:</string>
     <string name="moves">Moves:</string>
+
+    <string name="favorites_updated">FAVORITES UPDATED</string>
 </resources>
