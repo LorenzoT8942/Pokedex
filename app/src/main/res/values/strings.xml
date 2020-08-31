@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name" translatable="false">Pokedex</string>
     <string name="iv_pkmn_detail" translatable="false">pokemon</string>
-    <string name = "menu_about" translatable="false">About</string>
-    <string name = "menu_search">Search</string>
-    <string name = "menu_favor">Favorite</string>
-    <string name = "menu_del_all">Free All</string>
-    <string name = "menu_all_fav">Add All to Favorite</string>
-    <string name = "mn_cont_favor">Add to Favorite</string>
-    <string name = "mn_cont_del_favor">Delete from Favorites</string>
-    <string name = "menu_home" translatable="false">Home</string>
+    <string name="menu_about" translatable="false">About</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_favor">Favorite</string>
+    <string name="menu_del_all">Free All</string>
+    <string name="menu_all_fav">Add All to Favorite</string>
+    <string name="mn_cont_favor">Add to Favorite</string>
+    <string name="mn_cont_del_favor">Delete from Favorites</string>
+    <string name="menu_home" translatable="false">Home</string>
     <string name="tv_general_info" translatable="false">Info</string>
     <string name="tv_developers">Developers</string>
 

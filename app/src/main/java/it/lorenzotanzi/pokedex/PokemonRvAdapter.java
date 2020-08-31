@@ -136,6 +136,18 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
         iv_pkmn_icon.setImageResource(R.drawable.pokeball);
 
+        // onClickListener dell'immagine pokemon per far partire la galleria
+        iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(context,
+                        GalleryActivity.class);
+                intent.putExtra("PKID",pokemonList.get(position).getPkmnNum());
+                intent.putExtra("PKNAME",pokemonList.get(position).getPkmnName());
+                intent.putExtra("PKCOLOR",Color.WHITE);
+                context.startActivity(intent);
+            }
+        });
+
         //final String imgPkmnUrl = pokemonList.get(position).getImg();
 
         Picasso.get()

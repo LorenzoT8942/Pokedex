@@ -45,8 +45,6 @@ public class Details extends AppCompatActivity {
     private Pokemon pokemon;
     private Map<String, String> colors = new HashMap<>();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -83,6 +81,9 @@ public class Details extends AppCompatActivity {
         String type2 = bundle.getString("Type2");
         String img = bundle.getString("Img");
 
+        // servono per onClickListener dell' immagine pokemon per la galleria
+        final int pkid=Integer.parseInt(bundle.getString("ID"));
+        final String pkname=bundle.getString("name");
 
         TextView textView = findViewById(R.id.tvName);
         TextView textView1 = findViewById(R.id.tvId);
@@ -138,6 +139,18 @@ public class Details extends AppCompatActivity {
             window.setStatusBarColor(backgroundColor);
         }
 
+        // onClickListener dell'immagine del pokemon per la galleria
+        imageView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),
+                        GalleryActivity.class);
+                intent.putExtra("PKID",pkid);
+                intent.putExtra("PKNAME",pkname);
+                intent.putExtra("PKCOLOR",Color.WHITE);
+                startActivity(intent);
+            }
+        });
+
 
         Glide.with(this).load(img).into(imageView);
         //Aggiustamento della stringa nome
@@ -148,7 +161,6 @@ public class Details extends AppCompatActivity {
         //Chiama il thread che si occupa di trovare le informazioni del pokémon
         task = new AsyncTaskDetails(this, codice_n);
         task.execute();
-
     }
 
     /* NEW ADD */

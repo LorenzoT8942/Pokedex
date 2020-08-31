@@ -99,6 +99,8 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        final int pos=position;
+
         TextView tv_pkmn_num = holder.itemView.findViewById(R.id.tv_pkmn_num);
         TextView tv_pkmn_name = holder.itemView.findViewById(R.id.tv_pkmn_name);
         ImageView iv_pkmn_type1 = holder.itemView.findViewById(R.id.iv_pkmn_type1);
@@ -114,6 +116,18 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         String type1col = colors.get(type1str);
 
         final String imgPkmnUrl = favorites.get(position).getImg();
+
+        // onClickListener dell'immagine pokemon per far partire la galleria
+        iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(context,
+                        GalleryActivity.class);
+                intent.putExtra("PKID",favorites.get(pos).getPkmnNum());
+                intent.putExtra("PKNAME",favorites.get(pos).getPkmnName());
+                intent.putExtra("PKCOLOR",Color.WHITE);
+                context.startActivity(intent);
+            }
+        });
 
         //STRING ADJUSTMENTS
         if (Integer.parseInt(idString) < 10) idString = new StringBuilder().append("#00").append(idString).toString();
