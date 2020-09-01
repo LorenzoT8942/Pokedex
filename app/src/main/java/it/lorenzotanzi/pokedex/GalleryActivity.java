@@ -113,4 +113,6 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
         startActivity(detailIntent);
     }
 
+
+
 }

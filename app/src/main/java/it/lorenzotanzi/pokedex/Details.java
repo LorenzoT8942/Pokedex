@@ -82,8 +82,8 @@ public class Details extends AppCompatActivity {
         String img = bundle.getString("Img");
 
         // servono per onClickListener dell' immagine pokemon per la galleria
-        final int pkid=Integer.parseInt(bundle.getString("ID"));
-        final String pkname=bundle.getString("name");
+        final int pkid = Integer.parseInt(bundle.getString("ID"));
+        final String pkname = bundle.getString("name");
 
         TextView textView = findViewById(R.id.tvName);
         TextView textView1 = findViewById(R.id.tvId);
@@ -119,14 +119,14 @@ public class Details extends AppCompatActivity {
             int id2 = this.getResources().getIdentifier(_type2str , "drawable", this.getPackageName());
             int [] gradientColors = {Color.parseColor((type1col)), Color.parseColor(type2col)};
             GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
-            gd.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-            gd.setCornerRadius(30);
-            cl.setBackground(gd);
-            imageView2.setImageResource(id2);
             //Colore del notch
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setBackgroundDrawable(gd);
+            gd.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+            gd.setCornerRadius(30);
+            cl.setBackground(gd);
+            imageView2.setImageResource(id2);
         } else {
             /*Se invece il Pokemon ha un solo tipo viene settata la ImageView imageView2 come "invisible"
             e viene settato la sfondo della card view al colore  dell'unico tipo relativo al Pokemon*/
