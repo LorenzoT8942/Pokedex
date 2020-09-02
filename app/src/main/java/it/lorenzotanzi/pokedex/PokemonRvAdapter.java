@@ -136,7 +136,8 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
         iv_pkmn_icon.setImageResource(R.drawable.pokeball);
 
-        // onClickListener dell'immagine pokemon per far partire la galleria
+
+        // onClickListener sull'immagine pokemon per accedere tramite intent alla galleria
         iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(context, GalleryActivity.class);
@@ -149,6 +150,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
                 context.startActivity(intent);
             }
         });
+
 
         //final String imgPkmnUrl = pokemonList.get(position).getImg();
 

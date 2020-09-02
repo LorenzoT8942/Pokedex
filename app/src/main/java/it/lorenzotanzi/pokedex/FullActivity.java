@@ -1,16 +1,13 @@
 package it.lorenzotanzi.pokedex;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.ScrollView;
-import android.widget.TextView;
+
 
 import com.squareup.picasso.Picasso;
 
@@ -19,18 +16,16 @@ import java.util.Map;
 
 import static it.lorenzotanzi.pokedex.GalleryActivity.EXTRA_PKTYPE1;
 import static it.lorenzotanzi.pokedex.GalleryActivity.EXTRA_PKTYPE2;
-import static it.lorenzotanzi.pokedex.GalleryActivity.EXTRA_SPRITE;
 import static it.lorenzotanzi.pokedex.GalleryActivity.EXTRA_URL;
-import static it.lorenzotanzi.pokedex.GalleryActivity.EXTRA_PKNAME;
-import static it.lorenzotanzi.pokedex.GalleryActivity.EXTRA_PKID;
 
+// Dispone a schermo intero l'immagine selezionata del Pokemon
 public class FullActivity extends AppCompatActivity {
 
     private Map<String, String> colors = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        // mappiamo i tipi di pokemon a colori per il colore di background dell'activity
         colors.put("Normal", "#A8A77A");
         colors.put("Fire", "#EE8130");
         colors.put("Water","#6390F0");
@@ -52,39 +47,29 @@ public class FullActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full);
-
+        // creo un bundle e lo uso per estrarre i dati dall'intent che ha lanciato l'activity
         Bundle bundle = getIntent().getExtras();
+        // estrago l'url dell'immagine selezionata e i suoi due tipi usati per la colorazione del background
         String imageUrl = bundle.getString(EXTRA_URL);
-        String sprite = bundle.getString(EXTRA_SPRITE);
-        String id =bundle.getString(EXTRA_PKID);
-        String name=bundle.getString(EXTRA_PKNAME);
         String type1=bundle.getString(EXTRA_PKTYPE1);
         String type2=bundle.getString(EXTRA_PKTYPE2);
 
         ImageView imageView = findViewById(R.id.image_view);
-        //TextView textViewSprite= findViewById(R.id.text_view_sprite);
-        //TextView textViewId= findViewById(R.id.text_view_id);
-        //TextView textViewName= findViewById(R.id.text_view_name);
-
         NestedScrollView scrollLayout=findViewById(R.id.scrollLayout);
-
+        // in base ai due tipi determino il colore di background della NestedScrollView
         String type1col = colors.get(type1);
+        // se e due tipi allora creo gradiente
         if (type2 != null) {
             String type2col = colors.get(type2);
             int [] gradientColors = {Color.parseColor((type1col)), Color.parseColor(type2col)};
             GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
             gd.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-            //gd.setCornerRadius(30);
             scrollLayout.setBackground(gd);
-        } else {
+        } else { // un tipo
             int backgroundColor = Color.parseColor(type1col);
             scrollLayout.setBackgroundColor(backgroundColor);
         }
 
         Picasso.get().load(imageUrl).fit().centerInside().into(imageView);
-        //textViewId.setText(id);
-        //textViewName.setText(name);
-        //textViewSprite.setText(sprite);
-        //layout.setBackgroundColor(color);
     }
 }

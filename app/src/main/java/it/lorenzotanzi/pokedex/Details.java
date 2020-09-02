@@ -81,11 +81,13 @@ public class Details extends AppCompatActivity {
         String type2 = bundle.getString("Type2");
         String img = bundle.getString("Img");
 
-        // servono per onClickListener dell' immagine pokemon per la galleria
+
+        // Parametri da aggiungere nell'bundle dell'intent per accedere alla galleria
         final String pkid = bundle.getString("ID");
         final String pkname = bundle.getString("name");
         final String pktype1 = bundle.getString("Type1");
         final String pktype2 = bundle.getString("Type2");
+
 
         TextView textView = findViewById(R.id.tvName);
         TextView textView1 = findViewById(R.id.tvId);
@@ -141,7 +143,8 @@ public class Details extends AppCompatActivity {
             window.setStatusBarColor(backgroundColor);
         }
 
-        // onClickListener dell'immagine del pokemon per la galleria
+
+        // onClickListener sull'immagine pokemon per accedere tramite intent alla galleria
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GalleryActivity.class);

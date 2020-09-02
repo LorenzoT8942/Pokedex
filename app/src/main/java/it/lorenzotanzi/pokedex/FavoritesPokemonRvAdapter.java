@@ -99,7 +99,9 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        // position deve essere final per essere aggiunt nel bundle dell'intent per accedere alla galleria
         final int pos=position;
+
 
         TextView tv_pkmn_num = holder.itemView.findViewById(R.id.tv_pkmn_num);
         TextView tv_pkmn_name = holder.itemView.findViewById(R.id.tv_pkmn_name);
@@ -117,7 +119,8 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
 
         final String imgPkmnUrl = favorites.get(position).getImg();
 
-        // onClickListener dell'immagine pokemon per far partire la galleria
+
+        // // onClickListener sull'immagine pokemon per accedere tramite intent alla galleria
         iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(context, GalleryActivity.class);
@@ -130,6 +133,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
                 context.startActivity(intent);
             }
         });
+
 
         //STRING ADJUSTMENTS
         if (Integer.parseInt(idString) < 10) idString = new StringBuilder().append("#00").append(idString).toString();

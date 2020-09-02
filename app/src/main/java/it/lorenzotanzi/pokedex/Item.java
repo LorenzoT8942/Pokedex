@@ -1,13 +1,13 @@
 package it.lorenzotanzi.pokedex;
 
 public class Item {
-
-    private String mUrl;
-    private String mId;
-    private String mName;
-    private String mSprite;
-    private String mType1;
-    private String mType2;
+    // elemento della galleria
+    private String mUrl; // stringa url dell'immagine
+    private String mId; // id del Pokemon
+    private String mName; // nome pokemon
+    private String mSprite; // tipo di sprite
+    private String mType1; // tipo 1
+    private String mType2; // tipo 2
 
     public Item(String url, String sprite, String id, String name, String type1, String type2) {
         mUrl = url;

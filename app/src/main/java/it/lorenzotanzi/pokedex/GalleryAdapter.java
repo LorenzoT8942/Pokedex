@@ -1,6 +1,5 @@
 package it.lorenzotanzi.pokedex;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -20,11 +18,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     private Context mContext;
     private ArrayList<Item> mGalleryList;
     private OnItemClickListener mListener;
-
+    // interfaccia on click listener implementata sotto dall'adapter stesso
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
-
+    // il metodo onItemClick verrà sovrascritto nella GalleryActivity
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
@@ -45,14 +43,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         Item currentItem = mGalleryList.get(position);
         String url = currentItem.getUrl();
         String sprite = currentItem.getSprite();
-        String id = currentItem.getId();
-        String name = currentItem.getName();
-        //int color = currentItem.getColor();
-
-        //holder.mTextViewId.setText(id);
-        //holder.mTextViewName.setText(name);
+        // setta testo dell'elemento della gallery
         holder.mTextViewSprite.setText(sprite);
-        //holder.mCard.setBackgroundColor(color);
+        // per disporre l'immagine viene usata la libreria Picasso da url a bitmap
         Picasso.get().load(url).fit().centerInside().into(holder.mImageView);
     }
 
@@ -64,20 +57,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     public class GalleryViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView mImageView;
-        //public TextView mTextViewId;
-        //public TextView mTextViewName;
         public TextView mTextViewSprite;
-        //public CardView mCard;
 
         public GalleryViewHolder(View itemView) {
             super(itemView);
 
             mImageView = itemView.findViewById(R.id.image_view);
-            //mTextViewId = itemView.findViewById(R.id.text_view_id);
-            //mTextViewName = itemView.findViewById(R.id.text_view_name);
             mTextViewSprite = itemView.findViewById(R.id.text_view_sprite);
-            //mCard=(CardView) itemView.findViewById(R.id.itemCard);
-
+            // cliccando su un elemento della galleria, parte il metodo onItemClicked
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -22,4 +22,16 @@
     <string name="abilities">Abilità:</string>
     <string name="moves">Mosse:</string>
     <string name="favorites_updated">PREFERITI AGGIORNATI</string>
+
+    <string name="front_default">Fronte Predefinito</string>
+    <string name="front_female">Fronte Femmina</string>
+    <string name="front_shiny">Fronte Cromatico</string>
+    <string name="front_shiny_female">Fronte Cromatico Femmina</string>
+    <string name="back_default">Retro Default</string>
+    <string name="back_female">Retro Femmina</string>
+    <string name="back_shiny">Retro Cromatico</string>
+    <string name="back_shiny_female">Retro Cromatico Femmina</string>
+
+    <string name="gallery_photo">Foto Galleria</string>
+
 </resources>

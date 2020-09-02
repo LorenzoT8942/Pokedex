@@ -11,15 +11,14 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00B8D4">
+        android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="20dp"
+                android:layout_margin="@dimen/margin"
+                app:cardCornerRadius="@dimen/tvSize"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -29,10 +28,11 @@
 
                 <ImageView
                     android:id="@+id/image_view"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
+                    android:layout_width="@dimen/ivFull"
+                    android:layout_height="@dimen/ivFull"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/ic_launcher"
+                    android:contentDescription="@string/gallery_photo" />
 
             </androidx.cardview.widget.CardView>
 

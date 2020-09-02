@@ -27,5 +27,17 @@
     <string name="abilities">Abilities:</string>
     <string name="moves">Moves:</string>
 
+    <string name="front_default">Front Default</string>
+    <string name="front_female">Front Female</string>
+    <string name="front_shiny">Front Shiny</string>
+    <string name="front_shiny_female">Front Shiny Female</string>
+    <string name="back_default">Back Default</string>
+    <string name="back_female">Back Female</string>
+    <string name="back_shiny">Back Shiny</string>
+    <string name="back_shiny_female">Back Shiny Female</string>
+
+    <string name="gallery_photo">Gallery Photo</string>
+
     <string name="favorites_updated">FAVORITES UPDATED</string>
+
 </resources>

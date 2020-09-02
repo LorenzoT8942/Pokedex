@@ -305,13 +305,12 @@
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="200dp"
                     android:layout_height="10dp"
-                    android:layout_marginStart="121dp"
                     android:layout_marginTop="25dp"
                     android:progressBackgroundTint="@color/light"
                     android:progressTint="@color/green"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/tvSpecDef"
-                    app:layout_constraintStart_toStartOf="@id/tvSpecDef"
+                    app:layout_constraintStart_toEndOf="@+id/tvSpecDef"
                     app:layout_constraintTop_toBottomOf="@+id/pbSpecAttBar" />
 
                 <ProgressBar

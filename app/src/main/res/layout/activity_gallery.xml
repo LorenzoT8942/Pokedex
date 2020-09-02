@@ -6,28 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".GalleryActivity"
     android:orientation="vertical"
-    android:id="@+id/gallayout">
+    android:id="@+id/galLayout">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp">
+        android:layout_margin="@dimen/margin"
+        app:cardCornerRadius="@dimen/margin">
 
-    <TextView
-        android:id="@+id/tvgal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pokemon"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/tvgal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/tvSize" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

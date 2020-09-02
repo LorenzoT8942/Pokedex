@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="tvSize">20dp</dimen>
+    <dimen name="padding">16dp</dimen>
+    <dimen name="ivHeight">200dp</dimen>
+    <dimen name="ivFull">300dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="logoHeight">100dp</dimen>
+</resources>
