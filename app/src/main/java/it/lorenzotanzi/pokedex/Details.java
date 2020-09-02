@@ -82,8 +82,10 @@ public class Details extends AppCompatActivity {
         String img = bundle.getString("Img");
 
         // servono per onClickListener dell' immagine pokemon per la galleria
-        final int pkid = Integer.parseInt(bundle.getString("ID"));
+        final String pkid = bundle.getString("ID");
         final String pkname = bundle.getString("name");
+        final String pktype1 = bundle.getString("Type1");
+        final String pktype2 = bundle.getString("Type2");
 
         TextView textView = findViewById(R.id.tvName);
         TextView textView1 = findViewById(R.id.tvId);
@@ -142,11 +144,13 @@ public class Details extends AppCompatActivity {
         // onClickListener dell'immagine del pokemon per la galleria
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),
-                        GalleryActivity.class);
-                intent.putExtra("PKID",pkid);
-                intent.putExtra("PKNAME",pkname);
-                intent.putExtra("PKCOLOR",Color.WHITE);
+                Intent intent = new Intent(getApplicationContext(), GalleryActivity.class);
+                Bundle pkbundle = new Bundle();
+                pkbundle.putString("PKID",String.valueOf(pkid));
+                pkbundle.putString("PKNAME",pkname);
+                pkbundle.putString("PKTYPE1",pktype1);
+                pkbundle.putString("PKTYPE2",pktype2);
+                intent.putExtras(pkbundle);
                 startActivity(intent);
             }
         });

@@ -120,11 +120,13 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         // onClickListener dell'immagine pokemon per far partire la galleria
         iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(context,
-                        GalleryActivity.class);
-                intent.putExtra("PKID",favorites.get(pos).getPkmnNum());
-                intent.putExtra("PKNAME",favorites.get(pos).getPkmnName());
-                intent.putExtra("PKCOLOR",Color.WHITE);
+                Intent intent = new Intent(context, GalleryActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("PKID",favorites.get(pos).getPkmnNum().toString());
+                bundle.putString("PKNAME",favorites.get(pos).getPkmnName());
+                bundle.putString("PKTYPE1",favorites.get(pos).getType1());
+                bundle.putString("PKTYPE2",favorites.get(pos).getType2());
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });

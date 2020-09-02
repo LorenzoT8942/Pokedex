@@ -1,5 +1,6 @@
 package it.lorenzotanzi.pokedex;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,14 +45,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         Item currentItem = mGalleryList.get(position);
         String url = currentItem.getUrl();
         String sprite = currentItem.getSprite();
-        int id = currentItem.getId();
+        String id = currentItem.getId();
         String name = currentItem.getName();
-        int color = currentItem.getColor();
+        //int color = currentItem.getColor();
 
-        holder.mTextViewId.setText(String.valueOf(id));
-        holder.mTextViewName.setText(name);
+        //holder.mTextViewId.setText(id);
+        //holder.mTextViewName.setText(name);
         holder.mTextViewSprite.setText(sprite);
-        holder.mCard.setBackgroundColor(color);
+        //holder.mCard.setBackgroundColor(color);
         Picasso.get().load(url).fit().centerInside().into(holder.mImageView);
     }
 
@@ -63,19 +64,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     public class GalleryViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView mImageView;
-        public TextView mTextViewId;
-        public TextView mTextViewName;
+        //public TextView mTextViewId;
+        //public TextView mTextViewName;
         public TextView mTextViewSprite;
-        public CardView mCard;
+        //public CardView mCard;
 
         public GalleryViewHolder(View itemView) {
             super(itemView);
 
             mImageView = itemView.findViewById(R.id.image_view);
-            mTextViewId = itemView.findViewById(R.id.text_view_id);
-            mTextViewName = itemView.findViewById(R.id.text_view_name);
+            //mTextViewId = itemView.findViewById(R.id.text_view_id);
+            //mTextViewName = itemView.findViewById(R.id.text_view_name);
             mTextViewSprite = itemView.findViewById(R.id.text_view_sprite);
-            mCard=(CardView) itemView.findViewById(R.id.itemCard);
+            //mCard=(CardView) itemView.findViewById(R.id.itemCard);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

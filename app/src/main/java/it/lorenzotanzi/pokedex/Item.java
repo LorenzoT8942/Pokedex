@@ -3,33 +3,44 @@ package it.lorenzotanzi.pokedex;
 public class Item {
 
     private String mUrl;
-    private int mId;
+    private String mId;
     private String mName;
     private String mSprite;
-    private int mColor;
+    private String mType1;
+    private String mType2;
 
-    public Item(String url, String sprite, int id, String name, int color) {
+    public Item(String url, String sprite, String id, String name, String type1, String type2) {
         mUrl = url;
         mId= id;
         mName=name;
         mSprite = sprite;
-        mColor=color;
+        mType1=type1;
+        mType2=type2;
     }
 
     public String getUrl() {
         return mUrl;
     }
-    public int getId() {
+    public void setUrl(String url) { this.mUrl=url; }
+    public String getId() {
         return mId;
     }
+    public void setId(String id) { this.mId=id; }
     public String getName() {
         return mName;
     }
+    public void setName(String name) { this.mName=name; }
     public String getSprite() {
         return mSprite;
     }
-    public int getColor() {
-        return mColor;
+    public void setSprite(String sprite) { this.mSprite=sprite; }
+    public String getType1() {
+        return mType1;
     }
+    public void setType1(String type1) { this.mType1=type1; }
+    public String getType2() {
+        return mType2;
+    }
+    public void setType2(String type2) { this.mType2=type2; }
 
 }

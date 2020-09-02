@@ -139,11 +139,13 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         // onClickListener dell'immagine pokemon per far partire la galleria
         iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(context,
-                        GalleryActivity.class);
-                intent.putExtra("PKID",pokemonList.get(position).getPkmnNum());
-                intent.putExtra("PKNAME",pokemonList.get(position).getPkmnName());
-                intent.putExtra("PKCOLOR",Color.WHITE);
+                Intent intent = new Intent(context, GalleryActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("PKID",pokemonList.get(position).getPkmnNum().toString());
+                bundle.putString("PKNAME",pokemonList.get(position).getPkmnName());
+                bundle.putString("PKTYPE1",pokemonList.get(position).getType1());
+                bundle.putString("PKTYPE2",pokemonList.get(position).getType2());
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
