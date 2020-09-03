@@ -54,6 +54,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         /* initialization of favorite pokemon's layout */
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = findViewById(R.id.rv_favor_pkmn);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(favoritesAdapter);
 
