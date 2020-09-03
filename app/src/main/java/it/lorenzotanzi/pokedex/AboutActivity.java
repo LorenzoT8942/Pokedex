@@ -141,4 +141,12 @@ public class AboutActivity extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        unregisterReceiver(receiver1);
+        unregisterReceiver(receiver2);
+    }
 }
