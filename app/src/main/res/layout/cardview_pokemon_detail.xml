@@ -78,7 +78,8 @@
             android:id="@+id/iv_pkmn_status"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginEnd="@dimen/tvLayoutMarginRight"
+            android:contentDescription="@string/tvPkmnStatus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

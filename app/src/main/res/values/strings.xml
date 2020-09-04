@@ -40,4 +40,6 @@
 
     <string name="favorites_updated">FAVORITES UPDATED</string>
 
+    <string name="tvPkmnStatus" translatable="false">pokemon statuts</string>
+
 </resources>

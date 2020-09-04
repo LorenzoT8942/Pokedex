@@ -7,4 +7,5 @@
     <dimen name="ivFull">300dp</dimen>
     <dimen name="zero">0dp</dimen>
     <dimen name="logoHeight">100dp</dimen>
+    <dimen name="tvLayoutMarginRight">30dp</dimen>
 </resources>
