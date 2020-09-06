@@ -277,7 +277,8 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for(Pokemon poke : supportPokemonList){
-                    if(poke.getPkmnName().toLowerCase().contains(filterPattern) && poke.getPkmnName().startsWith(String.valueOf(filterPattern.charAt(0)))){
+                    if(poke.getPkmnName().toLowerCase().contains(filterPattern) && poke.getPkmnName().
+                            startsWith(String.valueOf(filterPattern.charAt(0)))){
                         pkmnFiltList.add(poke);
                     }
                 }
