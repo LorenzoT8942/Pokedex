@@ -50,18 +50,6 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
         String stringUrl = url[0];
         Bitmap bitmap = null;
 
-        /*InputStream inputStream;
-        try {
-
-            inputStream = new java.net.URL(stringUrl).openStream(); *//* fetch stream from net *//*
-            bitmap = BitmapFactory.decodeStream(inputStream); *//* convert stream into bitmap *//*
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-        return bitmap;*/
-
         HttpURLConnection urlConnection = null;
         try {
             URL uri = new URL(stringUrl);
