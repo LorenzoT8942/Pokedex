@@ -142,8 +142,6 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         else idString = new StringBuilder().append("#").append(idString).toString();
         pkmnNameString = pkmnNameString.substring(0, 1).toUpperCase() + pkmnNameString.substring(1);
 
-        iv_pkmn_icon.setImageResource(R.drawable.pokeball);
-
         /* if pokemon's image not in cache then download it, else load it into the pokemon's ImageView */
         File pokeImg = new File(context.getCacheDir() + "/favorites" + "/" + favorites.get(position).getPkmnName() + ".png");
         if(!pokeImg.exists()) {

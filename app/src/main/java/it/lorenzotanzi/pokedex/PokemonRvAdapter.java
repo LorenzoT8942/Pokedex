@@ -127,8 +127,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
        String type2str = pokemonList.get(position).getType2();
        String type1col = colors.get(type1str);
 
-        iv_pkmn_icon.setImageResource(R.drawable.pokeball);
-
 
         // onClickListener sull'immagine pokemon per accedere tramite intent alla galleria
         iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
