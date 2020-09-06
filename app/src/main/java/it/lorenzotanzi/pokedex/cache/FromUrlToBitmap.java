@@ -81,7 +81,6 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
     @Override
     public void onPostExecute(Bitmap bitmap){
         super.onPostExecute(bitmap);
-        //imageView.setImageBitmap(bitmap);
 
         /* save image into internal storage for next accesses */
         try {
