@@ -48,21 +48,13 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     private List<Pokemon> supportFavorPkmnList; // need for confermed choices - removed redundant initializer
     private PokemonDao pokemonDao;
 
-    //private PokemonRepository pokeRepo;
-
-    //PokemonRvAdapter(){}
-
     PokemonRvAdapter(int layoutId, Context context){
         pokemonItemLayout = layoutId;
         this.context = context;
         mListener = (SelectMode) context; /* MainActivity */
         PokemonRoomDatabase db = PokemonRoomDatabase.getDatabase(this.context);
         pokemonDao = db.pokemonDao();
-        // problema qui
-        //pokeRepo = new PokemonRepository(); /* così chiamo la sua DAO (conviene chiamare un opportuno metodo che fa quel che deve fare)
-        //                                     * probabile gestione di sincronizzazione*/
 
-        //supportFavorPkmnList = pokeRepo.getFavorites(true); // probably do not contains favorites
         supportFavorPkmnList = pokemonDao.getAllFavorites(true); // BISOGNA DEMANDARE A POKEMON-REPOSITORY L'INTERAZIONE CON LA DAO
 
         colors.put("Normal", "#A8A77A");
@@ -85,9 +77,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         colors.put("Fairy", "#D685AD");
 
     }
-
-    // PokemonRvAdapter(){} /* forse serve per far eseguire le ultime due azioni della 'fillFavorPkmnList'
-    // dal metodo async di pokeRepo*/
 
     void setPokemonList(List<Pokemon> pokemons){
         pokemonList = pokemons;
@@ -394,18 +383,10 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
         /* thanks to allow main-thread queries it work correctly */
 
-        //pokeRepo.count = favorPkmnList.size(); // need then for correct execution of 'finishUpdates'
-
         for(int index = 0; index < favorPkmnList.size(); index++){
             supportFavorPkmnList.add(favorPkmnList.get(index));
-            pokemonDao.setFavorite(favorPkmnList.get(index)); // ricorda quanto detto su PokemonRepository
-            //pokeRepo.updateFavorites(favorPkmnList.get(index));
+            pokemonDao.setFavorite(favorPkmnList.get(index));
         }
-        //necessario un altro metodo in pokeRepo di tipo async che esegua in backround 'endfillFavorPkmnList'
-        //solo dopo che vi siano stati tutti gli aggiornamenti di DAO
-
-        /* forse dopo la onPostExecute del metodo di pokeRepo vanno eseguite queste operazioni */
-        //pokeRepo.finishUpdates();
         favorPkmnList.removeAll(favorPkmnList);
         selectedList.clear();
 
@@ -415,12 +396,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     public List<Pokemon> chosenFavorites(){
         return supportFavorPkmnList;
     }
-
-
-    /*public void endFillFavorPkmnList(){
-        favorPkmnList.removeAll(favorPkmnList);
-        selectedList.clear();
-    }*/
 
 
     /* delete double and update pokemonList */
