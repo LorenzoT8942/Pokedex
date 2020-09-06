@@ -55,7 +55,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         PokemonRoomDatabase db = PokemonRoomDatabase.getDatabase(this.context);
         pokemonDao = db.pokemonDao();
 
-        supportFavorPkmnList = pokemonDao.getAllFavorites(true); // BISOGNA DEMANDARE A POKEMON-REPOSITORY L'INTERAZIONE CON LA DAO
+        supportFavorPkmnList = pokemonDao.getAllFavorites(true);
 
         colors.put("Normal", "#A8A77A");
         colors.put("Fire", "#EE8130");
