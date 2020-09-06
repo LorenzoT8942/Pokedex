@@ -3,6 +3,7 @@ package it.lorenzotanzi.pokedex;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -48,12 +49,16 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     private List<Pokemon> supportFavorPkmnList; // need for confermed choices - removed redundant initializer
     private PokemonDao pokemonDao;
 
-    PokemonRvAdapter(int layoutId, Context context){
+    private int orientation;
+
+    PokemonRvAdapter(int layoutId, Context context, int orientation){
         pokemonItemLayout = layoutId;
         this.context = context;
         mListener = (SelectMode) context; /* MainActivity */
         PokemonRoomDatabase db = PokemonRoomDatabase.getDatabase(this.context);
         pokemonDao = db.pokemonDao();
+
+        this.orientation = orientation;
 
         supportFavorPkmnList = pokemonDao.getAllFavorites(true);
 
@@ -332,32 +337,63 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
         if(isSel){
 
-            if(!supportFavorPkmnList.contains(pokemonList.get(position))){
+            if( orientation == Configuration.ORIENTATION_PORTRAIT) {
 
-                v.setSelected(false);
-                selectedList.delete(position);
+                if (!supportFavorPkmnList.contains(pokemonList.get(position))) {
 
-                pokemonList.get(position).setFavorites(false);
-                favorPkmnList.remove(pokemonList.get(position));
+                    v.setSelected(false);
+                    selectedList.delete(position);
 
+                    pokemonList.get(position).setFavorites(false);
+                    favorPkmnList.remove(pokemonList.get(position));
+
+                }
+            }else{
+                if (!pokemonDao.getFavorite(pokemonList.get(position).getPkmnName())) {
+
+                    v.setSelected(false);
+                    selectedList.delete(position);
+
+                    pokemonList.get(position).setFavorites(false);
+                    favorPkmnList.remove(pokemonList.get(position));
+
+                }
             }
 
         }else{
 
-            if(!supportFavorPkmnList.contains(pokemonList.get(position))){
+            if(orientation == Configuration.ORIENTATION_PORTRAIT) {
 
-                v.setSelected(true);
-                selectedList.put(position, true);
+                if (!supportFavorPkmnList.contains(pokemonList.get(position))) {
 
-                pokemonList.get(position).setFavorites(true);
-                favorPkmnList.add(pokemonList.get(position));
+                    v.setSelected(true);
+                    selectedList.put(position, true);
+
+                    pokemonList.get(position).setFavorites(true);
+                    favorPkmnList.add(pokemonList.get(position));
+                }
+            }else{
+                if (!pokemonDao.getFavorite(pokemonList.get(position).getPkmnName())) {
+
+                    v.setSelected(true);
+                    selectedList.put(position, true);
+
+                    pokemonList.get(position).setFavorites(true);
+                    favorPkmnList.add(pokemonList.get(position));
+                }
             }
 
         }
 
         /* thanks to this menu doesn't appear even if client touch on pokemon added to the favorites */
-        if(mListener != null && !supportFavorPkmnList.contains(pokemonList.get(position))){
-            mListener.onSelect(selectedList.size());
+        if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (mListener != null && !supportFavorPkmnList.contains(pokemonList.get(position))) {
+                mListener.onSelect(selectedList.size());
+            }
+        }else{
+            if (mListener != null && !pokemonDao.getFavorite(pokemonList.get(position).getPkmnName())) {
+                mListener.onSelect(selectedList.size());
+            }
         }
         notifyDataSetChanged();
         return true;
@@ -431,6 +467,10 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
     public void setSparseBooleanArray(SparseBooleanArray array){
         selectedList = array;
+    }
+
+    public void setOrientation(int currOrientation){
+        orientation = currOrientation;
     }
 
 }

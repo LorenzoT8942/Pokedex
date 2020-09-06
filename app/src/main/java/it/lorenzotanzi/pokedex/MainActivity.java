@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         mRecyclerView.setHasFixedSize(true); // new add for filter search
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new PokemonRvAdapter(R.layout.cardview_pokemon_detail, MainActivity.this);
+        int orientation = getResources().getConfiguration().orientation;
+        mAdapter = new PokemonRvAdapter(R.layout.cardview_pokemon_detail, MainActivity.this, orientation);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -231,6 +232,8 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         mAdapter.setPokemonList(pokemons);
         mAdapter.setFavorPkmnList(choices);
         mAdapter.setSparseBooleanArray(array);
+
+        mAdapter.setOrientation(getResources().getConfiguration().orientation);
 
         super.onRestoreInstanceState(savedInstanceState);
     }
