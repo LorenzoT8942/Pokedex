@@ -23,23 +23,18 @@ public class Pokemon implements Parcelable{
     @ColumnInfo(name = "ID")
     private Integer pkmnNum;
 
-    // new add
     @ColumnInfo(name = "favorite")
     private Boolean favorite;
 
-    //@NonNull // TEST --> ERRORE SE SI ABILITA IL @NonNull
     @ColumnInfo(name = "Name")
     private String pkmnName;
 
-    //@NonNull //TEST --> ERRORE SE SI ABILITA IL @NonNull
     @ColumnInfo(name = "Type1")
     private String type1;
 
-    //@NonNull // TEST --> ERRORE SE SI ABILITA IL @NonNull
     @ColumnInfo(name = "Type2")
     private String type2;
 
-    // new add
     @ColumnInfo(name = "Img")
     private String img;
 
@@ -47,15 +42,14 @@ public class Pokemon implements Parcelable{
 
     public Pokemon(@NonNull Integer pkmnNum, Boolean favorite, String pkmnName, String type1, String type2, String img) {
         this.pkmnNum = pkmnNum;
-        this.favorite = favorite; /* new add */
+        this.favorite = favorite;
         this.pkmnName = pkmnName;
         this.type1 = type1;
         this.type2 = type2;
-        this.img = img; /* new add */
+        this.img = img;
 
 
     }
-
 
 
 
@@ -94,18 +88,16 @@ public class Pokemon implements Parcelable{
         this.pkmnNum = pkmnNum;
     }
 
-    // new add
     @NonNull
     public Boolean getFavorite(){
         return favorite;
     }
 
-    // new add
     public void setFavorites(Boolean choice){
         this.favorite = choice;
     }
 
-    @NonNull // TEST
+    @NonNull
     public String getPkmnName() {
         return pkmnName;
     }
@@ -114,9 +106,7 @@ public class Pokemon implements Parcelable{
         this.pkmnName = pkmnName;
     }
 
-    //@NonNull //TEST
     public String getType1() {
-        //return this.type1;
         return type1;
     }
 
@@ -124,9 +114,7 @@ public class Pokemon implements Parcelable{
         this.type1 = type1;
     }
 
-    //@NonNull // TEST
     public String getType2() {
-        //return this.type2;
         return type2;
     }
 
@@ -134,12 +122,10 @@ public class Pokemon implements Parcelable{
         this.type2 = type2;
     }
 
-    /* new add */
     public String getImg() {
         return img;
     }
 
-    /* new add */
     public void setImg(String img) {
         this.img = img;
     }
