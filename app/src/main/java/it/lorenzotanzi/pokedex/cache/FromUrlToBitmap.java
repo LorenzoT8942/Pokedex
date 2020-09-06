@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import it.lorenzotanzi.pokedex.Pokemon;
@@ -45,18 +47,44 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
         String stringUrl = url[0];
         Bitmap bitmap = null;
 
-        InputStream inputStream;
+        /*InputStream inputStream;
         try {
 
-            inputStream = new java.net.URL(stringUrl).openStream(); /* fetch stream from net */
-            bitmap = BitmapFactory.decodeStream(inputStream); /* convert stream into bitmap */
+            inputStream = new java.net.URL(stringUrl).openStream(); *//* fetch stream from net *//*
+            bitmap = BitmapFactory.decodeStream(inputStream); *//* convert stream into bitmap *//*
 
         }catch (IOException e){
             e.printStackTrace();
         }
 
-        return bitmap;
+        return bitmap;*/
 
+        HttpURLConnection urlConnection = null;
+        try {
+            URL uri = new URL(stringUrl);
+            urlConnection = (HttpURLConnection) uri.openConnection();
+
+            int statusCode = urlConnection.getResponseCode();
+            if (statusCode != HttpURLConnection.HTTP_OK) {
+                return null;
+            }
+
+            InputStream inputStream = urlConnection.getInputStream();
+            if (inputStream != null) {
+
+                bitmap = BitmapFactory.decodeStream(inputStream);
+                return bitmap;
+            }
+        } catch (Exception e) {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+        return null;
     }
 
     @Override
