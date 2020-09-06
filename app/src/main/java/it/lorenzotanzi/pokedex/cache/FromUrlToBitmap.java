@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,6 +20,7 @@ import java.net.URL;
 import java.util.List;
 
 import it.lorenzotanzi.pokedex.Pokemon;
+import it.lorenzotanzi.pokedex.R;
 
 public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
 
@@ -90,7 +93,7 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
     @Override
     public void onPostExecute(Bitmap bitmap){
         super.onPostExecute(bitmap);
-        imageView.setImageBitmap(bitmap);
+        //imageView.setImageBitmap(bitmap);
 
         /* save image into internal storage for next accesses */
         try {
@@ -115,6 +118,8 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
 
         OutputStream outputStream = new FileOutputStream(new File((path)));
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+
+        Picasso.get().load(path).placeholder(R.drawable.pokeball).into(imageView);
 
     }
 }

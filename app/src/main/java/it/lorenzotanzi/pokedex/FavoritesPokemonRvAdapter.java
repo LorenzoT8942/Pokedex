@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -148,7 +149,8 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         if(!pokeImg.exists()) {
             new FromUrlToBitmap(iv_pkmn_icon, position, context, favorites, 0).execute(imgPkmnUrl);
         }else{
-            Glide.with(context).load(pokeImg).into(iv_pkmn_icon);
+            Picasso.get().load(pokeImg).placeholder(R.drawable.pokeball).into(iv_pkmn_icon);
+            //Glide.with(context).load(pokeImg).into(iv_pkmn_icon);
         }
 
         //BINDING OF POKEMON INFO AND CREATION OF GRADIENT BACKGROUND
