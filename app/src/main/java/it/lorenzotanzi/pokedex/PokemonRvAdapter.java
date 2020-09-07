@@ -161,7 +161,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
                     .into(iv_pkmn_icon);
             new FromUrlToBitmap(iv_pkmn_icon, position, context, pokemonList, 1).execute(imgPkmnUrl);
         }else{
-            Picasso.get().load(pokeImg).placeholder(R.drawable.pokeball).into(iv_pkmn_icon);
+            Picasso.get().load(pokeImg).placeholder(R.drawable.pokeball).error(R.drawable.pokeball).into(iv_pkmn_icon);
         }
 
         //STRING ADJUSTMENTS
