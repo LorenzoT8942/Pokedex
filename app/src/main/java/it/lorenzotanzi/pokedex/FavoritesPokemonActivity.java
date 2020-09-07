@@ -202,4 +202,11 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         super.onRestoreInstanceState(savedInstanceState);
     }
 
+    /* NEW ADD */
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }

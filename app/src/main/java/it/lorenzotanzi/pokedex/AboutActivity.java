@@ -149,4 +149,11 @@ public class AboutActivity extends AppCompatActivity {
         unregisterReceiver(receiver1);
         unregisterReceiver(receiver2);
     }
+
+    /* NEW ADD */
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
