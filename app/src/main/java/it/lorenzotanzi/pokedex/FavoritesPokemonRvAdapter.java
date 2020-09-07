@@ -145,6 +145,11 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         /* if pokemon's image not in cache then download it, else load it into the pokemon's ImageView */
         File pokeImg = new File(context.getCacheDir() + "/favorites" + "/" + favorites.get(position).getPkmnName() + ".png");
         if(!pokeImg.exists()) {
+            Picasso.get()
+                    .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + favorites.get(position).getPkmnNum() + ".png")
+                    .placeholder(R.drawable.pokeball)
+                    .error(R.drawable.pokeball)
+                    .into(iv_pkmn_icon);
             new FromUrlToBitmap(iv_pkmn_icon, position, context, favorites, 0).execute(imgPkmnUrl);
         }else{
             Picasso.get().load(pokeImg).placeholder(R.drawable.pokeball).into(iv_pkmn_icon);
