@@ -106,7 +106,7 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
         OutputStream outputStream = new FileOutputStream(new File((path)));
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
 
-        Picasso.get().load(path).placeholder(R.drawable.pokeball).into(imageView);
+        //Picasso.get().load(path).placeholder(R.drawable.pokeball).into(imageView);
 
     }
 }
