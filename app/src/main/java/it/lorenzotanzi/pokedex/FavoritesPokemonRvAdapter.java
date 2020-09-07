@@ -152,7 +152,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
                     .into(iv_pkmn_icon);
             new FromUrlToBitmap(iv_pkmn_icon, position, context, favorites, 0).execute(imgPkmnUrl);
         }else{
-            Picasso.get().load(pokeImg).placeholder(R.drawable.pokeball).into(iv_pkmn_icon);
+            Picasso.get().load(pokeImg).placeholder(R.drawable.pokeball).error(R.drawable.pokeball).into(iv_pkmn_icon);
         }
 
         //BINDING OF POKEMON INFO AND CREATION OF GRADIENT BACKGROUND
