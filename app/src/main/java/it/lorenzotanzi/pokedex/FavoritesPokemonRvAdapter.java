@@ -340,7 +340,6 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         /* bug with a lot of elements, if '+700' that's ok */
         for(int index = selectedList.size() + 700; index>=0; index--){
             if(selectedList.get(index, false)){
-                supportPokemonList.remove(favorites.get(index));
                 favorites.get(index).setFavorites(false);
                 pokemonDao.setFavorite(favorites.get(index));
                 remove(index);
@@ -353,7 +352,8 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
 
 
     public void remove(int position){
-        supportPokemonList.remove(position); // new add for bug during deleting and then research
+        supportPokemonList.remove(favorites.get(position));
+        //supportPokemonList.remove(position); // new add for bug during deleting and then research
         favorites.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeRemoved(0, position);
