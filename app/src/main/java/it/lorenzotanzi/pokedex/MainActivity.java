@@ -59,9 +59,9 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
             startSupportActionMode(mActionModeCallback);
         }
 
-        Log.d("MAIN", "onCreate");
         MyViewModelFactory myViewModelFactory = new MyViewModelFactory(this.getApplication());
         mViewModel = new ViewModelProvider(this, myViewModelFactory).get(MainViewModel.class);
+
         initListeners();
         initObservers();
         initRecyclerView();
@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
     }
 
     private void initRecyclerView() {
-        Log.d("MAIN", "initializing recycler view");
         mRecyclerView = findViewById(R.id.rv_pkmn);
         mRecyclerView.setHasFixedSize(true); // new add for filter search
         mLayoutManager = new LinearLayoutManager(this);
@@ -89,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
     }
 
     private void initObservers() {
-        Log.d("MAIN", "initializing observers");
         mViewModel.getAllPokemons().observe(this, new Observer<List<Pokemon>>() {
             @Override
             public void onChanged(List<Pokemon> pokemons) {

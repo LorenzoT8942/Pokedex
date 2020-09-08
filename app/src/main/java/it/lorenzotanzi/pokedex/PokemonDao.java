@@ -35,7 +35,7 @@ public interface PokemonDao {
     @Query("SELECT favorite FROM Pokemon WHERE name LIKE :name ")
     Boolean getFavorite(String name);
 
-@Query("SELECT * FROM Pokemon WHERE id LIKE :id")
+    @Query("SELECT * FROM Pokemon WHERE id LIKE :id")
     Pokemon findPokemonId(Integer id);
 
 }

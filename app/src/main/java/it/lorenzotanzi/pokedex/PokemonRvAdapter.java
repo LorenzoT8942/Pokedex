@@ -48,7 +48,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     private List<Pokemon> favorPkmnList = new ArrayList<>(); // need for not sure choices
     private List<Pokemon> supportFavorPkmnList; // need for confermed choices - removed redundant initializer
     private PokemonDao pokemonDao;
-
     private int orientation;
 
     PokemonRvAdapter(int layoutId, Context context, int orientation){
@@ -208,7 +207,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
         } else {
             /*SE INVECE IL POKEMON HA UN SOLO TIPO VIENE SETTATA LA IMAGE VIEW iv_pkmn_type2 COME "INVISIBLE"
-            * E VIENE SETTATO LO SFONDO DELLA CARD VIEW AL COLORE DELL'UNICO TIPO RELATIVO AL POKEMON*/
+             * E VIENE SETTATO LO SFONDO DELLA CARD VIEW AL COLORE DELL'UNICO TIPO RELATIVO AL POKEMON*/
             iv_pkmn_type2.setVisibility(View.INVISIBLE);
             int backgroundColor = Color.parseColor(type1col);
             cardView.setBackgroundColor(backgroundColor);

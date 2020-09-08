@@ -16,8 +16,6 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Pokemon implements Parcelable{
 
-
-
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "ID")
