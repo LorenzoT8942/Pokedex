@@ -152,7 +152,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
                 .into(iv_pkmn_icon);*/
 
         /* if pokemon's image not in cache then download it, else load it into the pokemon's ImageView */
-        File pokeImg = new File(context.getCacheDir() + "/pokemons" + "/" + pokemonList.get(position).getPkmnName() + ".png");
+        File pokeImg = new File(context.getCacheDir() + "/pokemons" + "/" + /*pokemonList*/supportPokemonList.get(position).getPkmnName() + ".png");
         if(!pokeImg.exists()) {
             Picasso.get()
                     .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemonList.get(position).getPkmnNum() + ".png")
