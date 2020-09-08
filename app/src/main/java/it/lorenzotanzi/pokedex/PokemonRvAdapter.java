@@ -159,7 +159,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
                     .placeholder(R.drawable.pokeball)
                     .error(R.drawable.pokeball)
                     .into(iv_pkmn_icon);
-            new FromUrlToBitmap(iv_pkmn_icon, position, context, /*pokemonList*/supportPokemonList, 1).execute(imgPkmnUrl);
+            new FromUrlToBitmap(iv_pkmn_icon, position, context, pokemonList, 1).execute(imgPkmnUrl);
         }else{
             Picasso.get().load(pokeImg).placeholder(R.drawable.pokeball).error(R.drawable.pokeball).into(iv_pkmn_icon);
         }
