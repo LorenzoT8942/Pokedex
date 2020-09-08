@@ -255,7 +255,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
                 for(Pokemon poke : supportPokemonList){
 
                     if(poke.getPkmnName().toLowerCase().contains(filterPattern) && poke.getPkmnName()
-                            .startsWith(String.valueOf(filterPattern.charAt(0)))){
+                            .startsWith(filterPattern)){
 
                         pkmnFiltList.add(poke);
 
