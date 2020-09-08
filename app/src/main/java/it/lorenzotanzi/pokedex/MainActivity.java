@@ -27,6 +27,7 @@ import android.view.View;
 
 import androidx.appcompat.widget.SearchView;
 //import android.widget.SearchView;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ import java.util.List;
 
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 
-public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener{
+public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener, View.OnFocusChangeListener{
 
     private MainViewModel mViewModel;
     private RecyclerView mRecyclerView;
@@ -66,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         initObservers();
         initRecyclerView();
 
-//        /* creation of sub-directory in order to memorize favorite pokemon's images */
-//        File imgCacheFolder = new File(getCacheDir() + "/pokemons");
-//        if (!imgCacheFolder.exists()) {
-//            imgCacheFolder.mkdir();
-//        }
+        /* creation of sub-directory in order to memorize favorite pokemon's images */
+        File imgCacheFolder = new File(getCacheDir() + "/pokemons");
+        if (!imgCacheFolder.exists()) {
+           imgCacheFolder.mkdir();
+        }
 
     }
 
@@ -104,9 +105,11 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         /* ---- FOR DINAMICAL SEARCH ON SEARCH MENU ---- */
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(this);
+
+        searchView.setOnQueryTextFocusChangeListener(this);
 
         return true;
     }
@@ -245,5 +248,19 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         startActivity(a);
     }
 
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        /*if(!hasFocus && mAdapter.getPokemonList().size() > 5){
+            if(!isInActionMode) {
+                mAdapter.getFilter().filter("");
+            }
+        }else{
+            if(mAdapter.getPokemonList().size() > 5){
+                if(!isInActionMode) {
+                    mAdapter.getFilter().filter("");
+                }
+            }
+        }*/
+    }
 }
 

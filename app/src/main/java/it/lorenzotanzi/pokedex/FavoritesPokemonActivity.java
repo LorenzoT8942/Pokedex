@@ -7,6 +7,8 @@ import android.os.Parcelable;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
@@ -21,7 +23,7 @@ import java.util.List;
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 
 // deve implementare anche searchView.setOnQueryTextListener -- REGOLI'S OBBLIGATION
-public class FavoritesPokemonActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener {
+public class FavoritesPokemonActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener{
 
     private ActionMode mActionMode; /* for contextual menu's appearence */
     private FavoritesPokemonRvAdapter favoritesAdapter;
@@ -68,7 +70,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         /* ---- DINAMICAL SEARCH ON SEARCH MENU ---- */
         MenuItem searchItem = menu.findItem(R.id.app_bar_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(this);
 
