@@ -118,8 +118,6 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         String type2str = favorites.get(position).getType2();
         String type1col = colors.get(type1str);
 
-        final String imgPkmnUrl = favorites.get(position).getImg();
-
 
         // // onClickListener sull'immagine pokemon per accedere tramite intent alla galleria
         iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +139,14 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         else if (Integer.parseInt(idString) < 100) idString = new StringBuilder().append("#0").append(idString).toString();
         else idString = new StringBuilder().append("#").append(idString).toString();
         pkmnNameString = pkmnNameString.substring(0, 1).toUpperCase() + pkmnNameString.substring(1);
+
+        final String imgPkmnUrl = favorites.get(position).getImg();
+
+        /*Picasso.get()
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + favorites.get(position).getPkmnNum() + ".png")
+                .placeholder(R.drawable.pokeball)
+                .error(R.drawable.pokeball)
+                .into(iv_pkmn_icon);*/
 
         /* if pokemon's image not in cache then download it, else load it into the pokemon's ImageView */
         File pokeImg = new File(context.getCacheDir() + "/favorites" + "/" + favorites.get(position).getPkmnName() + ".png");
