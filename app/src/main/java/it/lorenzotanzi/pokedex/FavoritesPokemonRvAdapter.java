@@ -55,6 +55,8 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
     Context context;
     private List<Pokemon> supportPokemonList; // needed for filter research
 
+    private List<Pokemon> currPkmnFiltList = new ArrayList<>();
+
     FavoritesPokemonRvAdapter(Context context, List<Pokemon> choices){
         favorites = choices;
         this.context = context;
@@ -296,6 +298,8 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
                 }
             }
 
+            currPkmnFiltList = pkmnFiltList;
+
             FilterResults results = new FilterResults();
             results.values = pkmnFiltList;
 
@@ -316,18 +320,34 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
     
     public void removeAllFavorites(){
 
-        if(favorites.size() >0 ) {
+        if(currPkmnFiltList.size() > 0){
 
-            for(int position = 0; position < favorites.size(); position++) {
-                favorites.get(position).setFavorites(false);
-                pokemonDao.setFavorite(favorites.get(position));
+            for(int position = 0; position < currPkmnFiltList.size(); position++) {
+                currPkmnFiltList.get(position).setFavorites(false);
+                pokemonDao.setFavorite(currPkmnFiltList.get(position));
             }
 
-            favorites.removeAll(favorites);
-            supportPokemonList.removeAll(supportPokemonList); // new add for bug during deleting and then research
+            favorites.removeAll(currPkmnFiltList);
+            supportPokemonList.removeAll(currPkmnFiltList);
             selectedList.clear();
             notifyDataSetChanged();
-            notifyItemRangeRemoved(0, favorites.size());
+            notifyItemRangeRemoved(0, currPkmnFiltList.size());
+
+        }else {
+
+            if (favorites.size() > 0) {
+
+                for (int position = 0; position < favorites.size(); position++) {
+                    favorites.get(position).setFavorites(false);
+                    pokemonDao.setFavorite(favorites.get(position));
+                }
+
+                favorites.removeAll(favorites);
+                supportPokemonList.removeAll(supportPokemonList); // new add for bug during deleting and then research
+                selectedList.clear();
+                notifyDataSetChanged();
+                notifyItemRangeRemoved(0, favorites.size());
+            }
         }
     }
 
