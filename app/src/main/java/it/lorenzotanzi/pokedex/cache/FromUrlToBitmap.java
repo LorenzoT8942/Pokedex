@@ -100,7 +100,9 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
             path += "/" + poke.get(position).getPkmnName() + ".png";
         }else{
             path = context.getCacheDir() + "/pokemons";
-            path += "/" + poke.get(position).getPkmnName() + ".png";
+            try{
+                path += "/" + poke.get(position).getPkmnName() + ".png";
+            }catch (IndexOutOfBoundsException ignored){}
         }
 
         OutputStream outputStream = new FileOutputStream(new File((path)));
