@@ -50,6 +50,8 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
     private PokemonDao pokemonDao;
     private int orientation;
 
+    private List<Pokemon> currPkmnFiltList = new ArrayList<>();
+
     PokemonRvAdapter(int layoutId, Context context, int orientation){
         pokemonItemLayout = layoutId;
         this.context = context;
@@ -265,6 +267,8 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
             }
 
+            currPkmnFiltList = pkmnFiltList;
+
             FilterResults results = new FilterResults();
             results.values = pkmnFiltList;
 
@@ -342,23 +346,19 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
                 if (!supportFavorPkmnList.contains(pokemonList.get(position))) {
 
-                        v.setSelected(false);
-                        selectedList.delete(position);
-
-                        pokemonList.get(position).setFavorites(false);
-                        favorPkmnList.remove(pokemonList.get(position));
-
+                    v.setSelected(false);
+                    selectedList.delete(position);
+                    pokemonList.get(position).setFavorites(false);
+                    favorPkmnList.remove(pokemonList.get(position));
 
                 }
             }else{
                 if (!pokemonDao.getFavorite(pokemonList.get(position).getPkmnName())) {
 
-                        v.setSelected(false);
-                        selectedList.delete(position);
-
-                        pokemonList.get(position).setFavorites(false);
-                        favorPkmnList.remove(pokemonList.get(position));
-
+                    v.setSelected(false);
+                    selectedList.delete(position);
+                    pokemonList.get(position).setFavorites(false);
+                    favorPkmnList.remove(pokemonList.get(position));
 
                 }
             }
@@ -369,20 +369,18 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
                 if (!supportFavorPkmnList.contains(pokemonList.get(position))) {
 
-                        v.setSelected(true);
-                        selectedList.put(position, true);
-
-                        pokemonList.get(position).setFavorites(true);
-                        favorPkmnList.add(pokemonList.get(position));
-
+                    v.setSelected(true);
+                    selectedList.put(position, true);
+                    pokemonList.get(position).setFavorites(true);
+                    favorPkmnList.add(pokemonList.get(position));
 
                 }
+
             }else{
                 if (!pokemonDao.getFavorite(pokemonList.get(position).getPkmnName())) {
 
                         v.setSelected(true);
                         selectedList.put(position, true);
-
                         pokemonList.get(position).setFavorites(true);
                         favorPkmnList.add(pokemonList.get(position));
 
@@ -394,11 +392,12 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         /* thanks to this menu doesn't appear even if client touch on pokemon added to the favorites */
         if(orientation == Configuration.ORIENTATION_PORTRAIT) {
             if (mListener != null && !supportFavorPkmnList.contains(pokemonList.get(position))) {
-                    mListener.onSelect(selectedList.size());
+                mListener.onSelect(selectedList.size());
             }
         }else{
             if (mListener != null && !pokemonDao.getFavorite(pokemonList.get(position).getPkmnName())) {
-                    mListener.onSelect(selectedList.size());
+                mListener.onSelect(selectedList.size());
+
             }
         }
         notifyDataSetChanged();
@@ -452,6 +451,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
                 }
             }
         }
+        supportPokemonList = new ArrayList<>(pokemonList);
 
     }
 
