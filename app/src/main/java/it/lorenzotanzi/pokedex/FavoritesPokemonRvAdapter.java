@@ -352,8 +352,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
 
 
     public void remove(int position){
-        supportPokemonList.remove(favorites.get(position));
-        //supportPokemonList.remove(position); // new add for bug during deleting and then research
+        supportPokemonList.remove(favorites.get(position)); // new add for bug during deleting and then research
         favorites.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeRemoved(0, position);
