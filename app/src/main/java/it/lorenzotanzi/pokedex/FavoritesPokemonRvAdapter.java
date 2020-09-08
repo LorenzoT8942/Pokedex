@@ -284,6 +284,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
 
             if(constraint == null || constraint.length() == 0 || constraint.toString().isEmpty()){
                 pkmnFiltList.addAll(supportPokemonList);
+
             }else{
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
@@ -339,6 +340,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         /* bug with a lot of elements, if '+700' that's ok */
         for(int index = selectedList.size() + 700; index>=0; index--){
             if(selectedList.get(index, false)){
+                supportPokemonList.remove(favorites.get(index));
                 favorites.get(index).setFavorites(false);
                 pokemonDao.setFavorite(favorites.get(index));
                 remove(index);
