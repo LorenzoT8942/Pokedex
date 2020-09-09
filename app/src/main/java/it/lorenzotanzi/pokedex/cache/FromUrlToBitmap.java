@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
@@ -93,7 +94,8 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
     /* Internal Storage */
     public void saveImgIntoInernalStorage(Bitmap bitmap, int position, Context context, List<Pokemon> poke, int choice) throws FileNotFoundException {
 
-        String path = null;
+        String path;
+        OutputStream outputStream = null;
 
         if(choice == 0) {
             path = context.getCacheDir() + "/favorites";
@@ -107,7 +109,11 @@ public class FromUrlToBitmap extends AsyncTask<String, Void, Bitmap> {
             }catch (IndexOutOfBoundsException ignored){}
         }
 
-        OutputStream outputStream = new FileOutputStream(new File((path)));
+
+        try{
+            outputStream = new FileOutputStream(new File((path)));
+        }catch (FileNotFoundException ignored){}
+
         try{
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
         }catch (NullPointerException ignored){}

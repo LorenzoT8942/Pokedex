@@ -38,7 +38,7 @@ import java.util.List;
 
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 
-public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener, View.OnFocusChangeListener{
+public class MainActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener, View.OnFocusChangeListener, SearchView.OnCloseListener{
 
     private MainViewModel mViewModel;
     private RecyclerView mRecyclerView;
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
     private ActionMode mActionMode; /* for contextual menu's appearence */
     private boolean isInActionMode = false; /* to preserve choices in contextual menu mode after device rotation */
     private MediaPlayer mp; /* sound effect after deletion event */
+
+    private SearchView searchIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +110,10 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(this);
-
         searchView.setOnQueryTextFocusChangeListener(this);
+        searchView.setOnCloseListener(this);
+
+        searchIcon = searchView;
 
         return true;
     }
@@ -190,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
         public void onDestroyActionMode(ActionMode mode) {
 
             isInActionMode = false;
-
             mAdapter.deselectAll();
             mActionMode = null;
         }
@@ -250,17 +253,17 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        /*if(!hasFocus && mAdapter.getPokemonList().size() > 5){
-            if(!isInActionMode) {
-                mAdapter.getFilter().filter("");
-            }
-        }else{
-            if(mAdapter.getPokemonList().size() > 5){
-                if(!isInActionMode) {
-                    mAdapter.getFilter().filter("");
-                }
-            }
-        }*/
+        if(!hasFocus && !isInActionMode){
+            mAdapter.getFilter().filter("");
+            searchIcon.clearFocus();
+            searchIcon.onActionViewCollapsed();
+            onClose();
+        }
+    }
+
+    @Override
+    public boolean onClose() {
+        return false;
     }
 }
 

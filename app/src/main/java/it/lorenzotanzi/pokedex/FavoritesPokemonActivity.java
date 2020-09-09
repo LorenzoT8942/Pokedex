@@ -23,13 +23,15 @@ import java.util.List;
 import it.lorenzotanzi.pokedex.interfaces.SelectMode;
 
 // deve implementare anche searchView.setOnQueryTextListener -- REGOLI'S OBBLIGATION
-public class FavoritesPokemonActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener{
+public class FavoritesPokemonActivity extends AppCompatActivity implements SelectMode, SearchView.OnQueryTextListener, View.OnFocusChangeListener, SearchView.OnCloseListener{
 
     private ActionMode mActionMode; /* for contextual menu's appearence */
     private FavoritesPokemonRvAdapter favoritesAdapter;
     List<Pokemon> favoritesList = new ArrayList<>();
     private boolean isInActionMode = false; /* to preserve choices in contextual menu mode after device rotation */
     private MediaPlayer mp; /* sound effect after deletion event */
+
+    private SearchView searchIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,10 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(this);
+        searchView.setOnQueryTextFocusChangeListener(this);
+        searchView.setOnCloseListener(this);
+
+        searchIcon = searchView;
 
         return true;
     }
@@ -211,4 +217,18 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         startActivity(intent);
     }
 
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if(!hasFocus && !isInActionMode){
+            favoritesAdapter.getFilter().filter("");
+            searchIcon.clearFocus();
+            searchIcon.onActionViewCollapsed();
+            onClose();
+        }
+    }
+
+    @Override
+    public boolean onClose() {
+        return false;
+    }
 }
