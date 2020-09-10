@@ -42,7 +42,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
     private Map<String, String> colors = new HashMap<>();
     private int pokemonItemLayout;
-    public Context context;
+    private Context context;
     private List<Pokemon> pokemonList;
     private List<Pokemon> supportPokemonList; // needed for filter research
     private SelectMode mListener;
@@ -120,8 +120,10 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         ImageView iv_pkmn_type1 = viewHolder.iv_pkmn_type1;
         ImageView iv_pkmn_type2 = viewHolder.iv_pkmn_type2;
         ImageView iv_pkmn_icon = viewHolder.iv_pkmn_icon;
-        final View cardView = viewHolder.cardView;
+        View cardView = viewHolder.cardView;
         ImageView iv_pkmn_status = viewHolder.iv_pkmn_status; // new add
+
+
 
         String idString = pokemonList.get(position).getPkmnNum().toString();
         String pkmnNameString = pokemonList.get(position).getPkmnName();
@@ -129,8 +131,9 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         String type2str = pokemonList.get(position).getType2();
         String type1col = colors.get(type1str);
 
-        // apri galleria con un click sull'icona Pokemon
-        /*iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
+
+        // onClickListener sull'immagine pokemon per accedere tramite intent alla galleria
+        iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(context, GalleryActivity.class);
                 Bundle bundle = new Bundle();
@@ -141,7 +144,7 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
-        });*/
+        });
 
 
         final String imgPkmnUrl = pokemonList.get(position).getImg();
@@ -295,6 +298,8 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         View cardView;
         ImageView iv_pkmn_status;
 
+
+
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_pkmn_icon = itemView.findViewById(R.id.iv_pkmn_icon);
@@ -304,10 +309,10 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
             iv_pkmn_type2 = itemView.findViewById(R.id.iv_pkmn_type2);
             cardView = itemView.findViewById(R.id.cl_card);
             iv_pkmn_status = itemView.findViewById(R.id.iv_pkmn_status); /* new add */
+
         }
 
     }
-
 
     /* if LongPress previously then repeat onLongClick actions */
     @Override
