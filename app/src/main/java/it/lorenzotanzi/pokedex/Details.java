@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,10 +41,16 @@ import java.util.Map;
 
 
 @Entity
-public class Details extends AppCompatActivity {
+public class Details extends AppCompatActivity implements View.OnClickListener{
     private AsyncTaskDetails task;
     private Pokemon pokemon;
     private Map<String, String> colors = new HashMap<>();
+
+    // necessarie come parametri per openGallery
+    private String pkid = new String();
+    private String pkname = new String();
+    private String pktype1 = new String();
+    private String pktype2 = new String();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,20 +88,21 @@ public class Details extends AppCompatActivity {
         String type2 = bundle.getString("Type2");
         String img = bundle.getString("Img");
 
-
-        // Parametri da aggiungere nell'bundle dell'intent per accedere alla galleria
-        final String pkid = bundle.getString("ID");
-        final String pkname = bundle.getString("name");
-        final String pktype1 = bundle.getString("Type1");
-        final String pktype2 = bundle.getString("Type2");
-
-
         TextView textView = findViewById(R.id.tvName);
         TextView textView1 = findViewById(R.id.tvId);
         ImageView imageView1 = findViewById(R.id.ivType1);
         ImageView imageView2 = findViewById(R.id.ivType2);
         ImageView imageView = findViewById(R.id.ivPokeball);
         ConstraintLayout cl = findViewById(R.id.clGeneral);
+
+        // assegna parametri openGallery
+        pkid = bundle.getString("ID");
+        pkname = bundle.getString("name");
+        pktype1 = bundle.getString("Type1");
+        pktype2 = bundle.getString("Type2");
+        Button btnGallery=findViewById(R.id.btnGallery);
+        btnGallery.setOnClickListener(this);
+
 
         //Aggiustamento della stringa id
         if (Integer.parseInt(id) < 10) id = new StringBuilder().append("#00").append(id).toString();
@@ -142,22 +150,6 @@ public class Details extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         }
 
-
-        // onClickListener sull'immagine pokemon per accedere tramite intent alla galleria
-        imageView.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), GalleryActivity.class);
-                Bundle pkbundle = new Bundle();
-                pkbundle.putString("PKID",String.valueOf(pkid));
-                pkbundle.putString("PKNAME",pkname);
-                pkbundle.putString("PKTYPE1",pktype1);
-                pkbundle.putString("PKTYPE2",pktype2);
-                intent.putExtras(pkbundle);
-                startActivity(intent);
-            }
-        });
-
-
         Glide.with(this).load(img).into(imageView);
         //Aggiustamento della stringa nome
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
@@ -177,6 +169,34 @@ public class Details extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_bottom);
     }
 
+    // onClick per l'icona Pokemon e disabilita doppio click
+    @Override
+    public void onClick(View v) {
+        if (v.getId()==R.id.btnGallery){
+            v.setEnabled(false);
+            openGallery();
+        }
+    }
+
+    // apre galleria con intent
+    public void openGallery() {
+        Intent intent = new Intent(getApplicationContext(), GalleryActivity.class);
+        Bundle pkbundle = new Bundle();
+        pkbundle.putString("PKID",String.valueOf(pkid));
+        pkbundle.putString("PKNAME",pkname);
+        pkbundle.putString("PKTYPE1",pktype1);
+        pkbundle.putString("PKTYPE2",pktype2);
+        intent.putExtras(pkbundle);
+        startActivity(intent);
+    }
+
+    // riabilita click sull'icona Pokemon al ritorno dalla galleria
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Button btnGallery = findViewById(R.id.btnGallery);
+        btnGallery.setEnabled(true);
+    }
 }
 
 

@@ -100,6 +100,16 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/normal" />
 
+                <Button
+                    android:id="@+id/btnGallery"
+                    android:layout_width="@dimen/gallery_button"
+                    android:layout_height="@dimen/gallery_button"
+                    android:background="@drawable/gallery_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypes"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypes"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTypes" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <FrameLayout
