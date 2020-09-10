@@ -131,22 +131,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
         String type2str = pokemonList.get(position).getType2();
         String type1col = colors.get(type1str);
 
-
-        // onClickListener sull'immagine pokemon per accedere tramite intent alla galleria
-        iv_pkmn_icon.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(context, GalleryActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("PKID",pokemonList.get(position).getPkmnNum().toString());
-                bundle.putString("PKNAME",pokemonList.get(position).getPkmnName());
-                bundle.putString("PKTYPE1",pokemonList.get(position).getType1());
-                bundle.putString("PKTYPE2",pokemonList.get(position).getType2());
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
-        });
-
-
         final String imgPkmnUrl = pokemonList.get(position).getImg();
 
         /*Picasso.get()
