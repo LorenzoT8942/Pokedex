@@ -25,6 +25,7 @@ public class FullActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         // mappiamo i tipi di pokemon a colori per il colore di background dell'activity
         colors.put("Normal", "#A8A77A");
         colors.put("Fire", "#EE8130");
@@ -47,6 +48,7 @@ public class FullActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full);
+
         // creo un bundle e lo uso per estrarre i dati dall'intent che ha lanciato l'activity
         Bundle bundle = getIntent().getExtras();
         // estrago l'url dell'immagine selezionata e i suoi due tipi usati per la colorazione del background
@@ -56,6 +58,7 @@ public class FullActivity extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.image_view);
         NestedScrollView scrollLayout=findViewById(R.id.scrollLayout);
+
         // in base ai due tipi determino il colore di background della NestedScrollView
         String type1col = colors.get(type1);
         // se e due tipi allora creo gradiente
