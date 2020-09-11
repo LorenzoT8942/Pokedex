@@ -71,7 +71,7 @@ class PokemonRepository {
         protected Integer doInBackground(RequestQueue... requestQueues) {
 
             if (asyncTaskDao.checkDatabase().length < 1) {
-                for (int i = 1; i < 700; i++) {
+                for (int i = 1; i < 808; i++) {
                     String Index = Integer.toString(i);
                     String url = String.format("https://pokeapi.co/api/v2/pokemon/%s/", Integer.toString(i));
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,

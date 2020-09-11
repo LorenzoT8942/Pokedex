@@ -35,7 +35,7 @@ public class AboutActivity extends AppCompatActivity {
 
         favoritesList = getIntent().getParcelableArrayListExtra("favorites");
 
-        /* registration of Recivers' for threads' services */
+        /* registration of Receivers' for threads' services */
         registerReceiver(receiver1, new IntentFilter(LoadGeneralsThread.NOTIFICATION));
         registerReceiver(receiver2, new IntentFilter(LoadFileInfoThread.NOTIFICATION));
 

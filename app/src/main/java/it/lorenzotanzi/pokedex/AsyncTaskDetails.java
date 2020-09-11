@@ -243,7 +243,12 @@ public class AsyncTaskDetails extends AsyncTask<String, Integer, Integer>{
                 TextView t1 = v.findViewById(R.id.tvMoveName);
                 TextView t2 = v.findViewById(R.id.tvLevel);
                 t1.setText(arrayOfMoves.get(i).getMoveName());
-                String lv = "lv. " + arrayOfMoves.get(i).getLevel();
+                String lv;
+                if (arrayOfMoves.get(i).getLevel() == 0){
+                    lv = "MT/MN";
+                }else {
+                    lv = "lv. " + arrayOfMoves.get(i).getLevel();
+                }
                 t2.setText(lv);
                 llMoves.addView(v);
             }

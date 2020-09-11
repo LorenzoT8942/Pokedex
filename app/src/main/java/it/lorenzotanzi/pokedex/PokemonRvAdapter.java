@@ -88,10 +88,8 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
     void setPokemonList(List<Pokemon> pokemons){
         pokemonList = pokemons;
-
         /* new add necessary for filter search */
         supportPokemonList = new ArrayList<>(pokemonList);
-
         notifyDataSetChanged();
     }
 
