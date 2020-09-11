@@ -1,9 +1,12 @@
 package it.lorenzotanzi.pokedex;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -79,6 +82,18 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         searchView.setOnCloseListener(this);
 
         searchIcon = searchView;
+
+        /* change color of 'Free All' from black to white */
+        MenuItem item_del = menu.findItem(R.id.menu_del_all);
+        SpannableString spannableStringDel = new SpannableString(item_del.getTitle().toString());
+        spannableStringDel.setSpan(new ForegroundColorSpan(Color.WHITE), 0, spannableStringDel.length(), 0);
+        item_del.setTitle(spannableStringDel);
+
+        /* change color of 'About' from black to white*/
+        MenuItem item_about = menu.findItem(R.id.menu_about);
+        SpannableString spannableStringAbout = new SpannableString(item_about.getTitle().toString());
+        spannableStringAbout.setSpan(new ForegroundColorSpan(Color.WHITE), 0, spannableStringAbout.length(), 0);
+        item_about.setTitle(spannableStringAbout);
 
         return true;
     }
