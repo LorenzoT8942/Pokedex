@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements SelectMode, Searc
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
+        /* go to general info's page */
         if (item.getItemId() == R.id.menu_about) {
 
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
