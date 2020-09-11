@@ -89,7 +89,7 @@ public class FavoritesPokemonActivity extends AppCompatActivity implements Selec
         spannableStringDel.setSpan(new ForegroundColorSpan(Color.WHITE), 0, spannableStringDel.length(), 0);
         item_del.setTitle(spannableStringDel);
 
-        /* change color of 'About' from black to white*/
+        /* change color of 'About' from black to white */
         MenuItem item_about = menu.findItem(R.id.menu_about);
         SpannableString spannableStringAbout = new SpannableString(item_about.getTitle().toString());
         spannableStringAbout.setSpan(new ForegroundColorSpan(Color.WHITE), 0, spannableStringAbout.length(), 0);
