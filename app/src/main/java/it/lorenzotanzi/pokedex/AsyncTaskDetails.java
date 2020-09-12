@@ -133,12 +133,12 @@ public class AsyncTaskDetails extends AsyncTask<String, Integer, Integer>{
 
                     try {
 
-                        //Informazioni generali sul pokemon: peso etc..7
+                        //Informazioni generali sul pokemon: peso etc..
                         HeightT = response.getInt("height") / 10.0 + " m";
                         WeightT = response.getInt("weight") / 10.0 + " Kg";
                         BET = response.getString("base_experience");
 
-                        /* STATS */
+                        /* statistiche */
 
                         JSONArray stats = response.getJSONArray("stats");
 
@@ -150,7 +150,7 @@ public class AsyncTaskDetails extends AsyncTask<String, Integer, Integer>{
                         hp = (int) stats.getJSONObject(5).getInt("base_stat");
 
 
-                        /* ABILITIES */
+                        /* abilità */
 
                         JSONArray abilities = response.getJSONArray("abilities");
 
@@ -160,7 +160,7 @@ public class AsyncTaskDetails extends AsyncTask<String, Integer, Integer>{
 
                         }
 
-                        /* MOVES */
+                        /* mosse */
 
                         JSONArray temp_moves = response.getJSONArray("moves");
 

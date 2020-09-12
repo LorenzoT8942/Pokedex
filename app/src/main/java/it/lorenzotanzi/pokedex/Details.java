@@ -120,7 +120,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener{
 
 
         //se il pokemonn in posizione position ha un tipo2 allora viene settato il testo della imageView
-        //imageView2 e viene creata una nuova istanza si GradientDrawable che verrà usata come
+        //imageView2 e viene creata una nuova istanza di GradientDrawable che verrà usata come
         //background della Details
 
         if (type2 != null) {
@@ -141,7 +141,7 @@ public class Details extends AppCompatActivity implements View.OnClickListener{
             imageView2.setImageResource(id2);
         } else {
             /*Se invece il Pokemon ha un solo tipo viene settata la ImageView imageView2 come "invisible"
-            e viene settato la sfondo della card view al colore  dell'unico tipo relativo al Pokemon*/
+            e viene settato lo sfondo della card view al colore  dell'unico tipo relativo al Pokemon*/
             imageView2.setVisibility(View.INVISIBLE);
             int backgroundColor = Color.parseColor(type1col);
             cl.setBackgroundColor(backgroundColor);
@@ -161,7 +161,6 @@ public class Details extends AppCompatActivity implements View.OnClickListener{
         task.execute();
     }
 
-    /* NEW ADD */
     @Override
     public void onBackPressed(){
         super.onBackPressed();
