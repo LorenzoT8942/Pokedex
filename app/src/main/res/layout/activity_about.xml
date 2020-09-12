@@ -88,7 +88,10 @@
                 android:layout_height="wrap_content"
                 android:background="@color/yellow"
                 android:textAlignment="center"
-                android:textColor="@color/newPokedexColor" />
+                android:textColor="@color/newPokedexColor"
+                android:paddingBottom="@dimen/padding"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

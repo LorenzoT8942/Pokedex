@@ -14,7 +14,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_item_about"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_image"
