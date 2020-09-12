@@ -131,12 +131,6 @@ public class PokemonRvAdapter extends RecyclerView.Adapter<PokemonRvAdapter.View
 
         final String imgPkmnUrl = pokemonList.get(position).getImg();
 
-        /*Picasso.get()
-                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemonList.get(position).getPkmnNum() + ".png")
-                .placeholder(R.drawable.pokeball)
-                .error(R.drawable.pokeball)
-                .into(iv_pkmn_icon);*/
-
         /* if pokemon's image not in cache then download it, else load it into the pokemon's ImageView */
         File pokeImg = new File(context.getCacheDir() + "/pokemons" + "/" + pokemonList.get(position).getPkmnName() + ".png");
         if(!pokeImg.exists()) {
