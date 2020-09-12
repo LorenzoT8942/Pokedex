@@ -45,8 +45,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/yellow"
-                    android:padding="10dp"
-                    android:scrollbarSize="5dp"
+                    android:padding="@dimen/padding_rv"
+                    android:scrollbarSize="@dimen/scollbarSize_rv"
                     android:scrollbars="vertical">
 
                 </androidx.recyclerview.widget.RecyclerView>

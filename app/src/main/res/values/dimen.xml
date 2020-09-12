@@ -9,4 +9,16 @@
     <dimen name="zero">0dp</dimen>
     <dimen name="logoHeight">100dp</dimen>
     <dimen name="tvLayoutMarginRight">30dp</dimen>
+    <dimen name="padding_rv">10dp</dimen>
+    <dimen name="scollbarSize_rv">5dp</dimen>
+    <dimen name="cardCornerRadius_item">20dp</dimen>
+    <dimen name="cardElevation_item">20dp</dimen>
+    <dimen name="marginStart_tv">8dp</dimen>
+    <dimen name="marginEnd_tv">8dp</dimen>
+    <dimen name="marginTop_tvGen">16dp</dimen>
+    <dimen name="marginTop_tvMail">14dp</dimen>
+    <dimen name="width_ivAbout">96dp</dimen>
+    <dimen name="height_ivAbout">96dp</dimen>
+    <dimen name="civBorderWidth_ivAbout">2dp</dimen>
+
 </resources>
