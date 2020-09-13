@@ -333,7 +333,7 @@ public class FavoritesPokemonRvAdapter extends RecyclerView.Adapter<ViewHolder> 
         }
 
         /* bug with a lot of elements, if '+700' that's ok */
-        for(int index = selectedList.size() + 700; index>=0; index--){
+        for(int index = selectedList.size() + 807; index>=0; index--){
             if(selectedList.get(index, false)){
                 favorites.get(index).setFavorites(false);
                 pokemonDao.setFavorite(favorites.get(index));
